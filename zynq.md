@@ -44,42 +44,30 @@ while(1)
 }
 ```
 
-# 中断用法
-## 1. 声明中断
-```c
-XScuGic INTCInst;   // 可以是全局变量
-```
+# 中断基本用法
 
-## 2. 声明
+## 中断配置
 ```c
 #include "xscugic.h"
 #include "xil_exception.h"
 
-XScuGic_Config *IntcConfig;
-```
+// 1. 中断实例和配置参数
+static XScuGic INTCInst;   // 全局变量
+static XScuGic_Config *IntcConfig;  // 也可以使用局部变量
 
-## 3.
-```c
+// 2. 查找配置
 IntcConfig = XScuGic_LookupConfig(DeviceId);
-```
 
-## 4. 
-```c
+// 3. 初始化
 status = XScuGic_CfgInitialize(&INTCInst, IntcConfig, IntcConfig->CpuBaseAddress);
 if(status != XST_SUCCESS)
     return XST_FAILURE;
-```
 
-## 5.
-```c
-Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
-        (Xil_ExceptionHandler)XScuGic_InterruptHandler,
-        XScuGicInstancePtr);
+Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,			// fixed
+        (Xil_ExceptionHandler)XScuGic_InterruptHandler,		// fixed
+        &INTCInst);											// 
 Xil_ExceptionEnable();
-```
 
-## 6.
-```c
 status = XScuGic_Connect(&INTCInst,
         INTC_GPIO_INTERRUPT_ID,
         (Xil_ExceptionHandler)BTN_Intr_Handler, // 中断处理函数
@@ -88,25 +76,24 @@ if(status != XST_SUCCESS)
     return XST_FAILURE;
 ```
 
-## 7.
-```c
-XGpio_InterruptEnable(GpioInstancePtr, 1);
+XGpio_InterruptEnable(GpioInstancePtr, 1); 		// 和具体中断有关
 XGpio_InterruptGlobalEnable(GpioInstancePtr);
 XScuGic_Enable(&INTCInst, INTC_GPIO_INTERRUPT_ID);
+```
 
-## 8.
+## 中断函数流程
 ```c
 void BTN_Intr_Handler(void *InstancePtr)
 {
 	unsigned char led_val = 0;
-
-	if( (XGpio_InterruptGetStatus(&BTNInst) & BTN_INT) != BTN_INT)
+	// 1. 禁止中断
+	if( (XGpio_InterruptGetStatus(&BTNInst) & XGPIO_IR_CH1_MASK) != XGPIO_IR_CH1_MASK)
 	{
 		return ;
 
-		XGpio_InterruptDisable(&BTNInst, BTN_INT);
+		XGpio_InterruptDisable(&BTNInst, XGPIO_IR_CH1_MASK);
 	}
-
+	// 2. 处理流程
 	btn_value = ~XGpio_DiscreteRead(&BTNInst, 1) & 0x1f;
 	switch(btn_value)
 	{
@@ -118,8 +105,9 @@ void BTN_Intr_Handler(void *InstancePtr)
 	}
 
 	XGpio_DiscreteWrite(&LED, 1, led_val);
-	(void)XGpio_InterruptClear(&BTNInst, BTN_INT);
-	XGpio_InterruptEnable(&BTNInst, BTN_INT);
+
+	// 3. 清除中断标志并再次打开中断
+	(void)XGpio_InterruptClear(&BTNInst, XGPIO_IR_CH1_MASK);
+	XGpio_InterruptEnable(&BTNInst, XGPIO_IR_CH1_MASK);
 }
-```
 ```
