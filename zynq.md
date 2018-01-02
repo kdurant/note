@@ -1,9 +1,9 @@
 # MIO
 ## 概述
 * 基址 0xE000A000
-![pic]()
+![pic](https://github.com/kdurant/note/blob/master/res/zynq/MIO_planner.png)
 MIO上的引脚为复用引脚，ARM上外设也可以使用。
-![pic]()
+![pic](https://github.com/kdurant/note/blob/master/res/zynq/MIO_config.png)
 
 ## 使用流程
 ```c
