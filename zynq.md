@@ -44,6 +44,37 @@ while(1)
 }
 ```
 
+# AXI_GPIO
+block设计中添加`AXI_GPIO`IP核
+```c
+#include "xparameters.h"
+#include "xgpio.h"
+#include "sleep.h"
+#define LED_DEVICE_ID		XPAR_AXI_GPIO_0_DEVICE_ID
+
+XGpio LED;
+
+int main(void)
+{
+	int status;
+
+	status = XGpio_Initialize(&LED, LED_DEVICE_ID);
+	if(status != XST_SUCCESS)
+		return XST_FAILURE;
+
+	XGpio_SetDataDirection(&LED, 1, 0xff);
+	int i = 0;
+	while(1)
+	{
+		XGpio_DiscreteWrite(&LED, 1, 0x01<<i);
+		sleep(1);
+		i++;
+		if(i == 8)
+			i = 0;
+	}
+}
+```
+
 # 中断基本用法
 
 ## 中断配置
@@ -109,5 +140,83 @@ void BTN_Intr_Handler(void *InstancePtr)
 	// 3. 清除中断标志并再次打开中断
 	(void)XGpio_InterruptClear(&BTNInst, XGPIO_IR_CH1_MASK);
 	XGpio_InterruptEnable(&BTNInst, XGPIO_IR_CH1_MASK);
+}
+```
+
+# 定时器中断基本用法
+```c
+#include <stdio.h>
+
+#include "xil_types.h"
+#include "Xscugic.h"
+#include "xil_exception.h"
+#include "xscutimer.h"
+
+#define TIMER_DEVICE_ID		XPAR_XSCUTIMER_0_DEVICE_ID
+#define INTC_DEVICE_ID		XPAR_SCUGIC_SINGLE_DEVICE_ID
+#define TIMER_IRPT_INTR		XPAR_SCUTIMER_INTR
+
+#define TIMER_LOAD_VALUE	0x13D92D3f
+
+static XScuGic Intc;
+static XScuTimer Timer;
+
+static void SetupInterruptSystem(XScuGic *GicInstancePtr,
+		XScuTimer *TimerInstancePtr, u16 TimerIntrId);
+
+static void TimerIntrHandler(void *CallBackRef);
+
+int main(void)
+{
+	XScuTimer_Config *TMRConfigPtr;
+	printf("--------------START-------------");
+
+	TMRConfigPtr = XScuTimer_LookupConfig(TIMER_DEVICE_ID);
+	XScuTimer_CfgInitialize(&Timer, TMRConfigPtr, TMRConfigPtr->BaseAddr);
+	XScuTimer_SelfTest(&Timer);
+	XScuTimer_LoadTimer(&Timer, TIMER_LOAD_VALUE);
+	XScuTimer_EnableAutoReload(&Timer);
+	XScuTimer_Start(&Timer);
+
+	SetupInterruptSystem(&Intc, &Timer, TIMER_IRPT_INTR);
+
+	while(1);
+	{
+
+	}
+
+	return 0;
+}
+
+void SetupInterruptSystem(XScuGic *GicInstancePtr,
+		XScuTimer *TimerInstancePtr, u16 TimerIntrId)
+{
+	XScuGic_Config *IntcConfig;
+	Xil_ExceptionInit();
+	IntcConfig = XScuGic_LookupConfig(INTC_DEVICE_ID);
+	XScuGic_CfgInitialize(GicInstancePtr, IntcConfig,
+			IntcConfig->CpuBaseAddress);
+
+	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,
+			(Xil_ExceptionHandler)XScuGic_InterruptHandler,
+			GicInstancePtr);
+
+	XScuGic_Connect(GicInstancePtr, TimerIntrId,
+			(Xil_ExceptionHandler)TimerIntrHandler,
+			(void *)TimerInstancePtr);
+
+	XScuGic_Enable(GicInstancePtr, TimerIntrId);
+	XScuTimer_EnableInterrupt(TimerInstancePtr);
+	Xil_ExceptionEnableMask(XIL_EXCEPTION_IRQ);
+}
+
+static void TimerIntrHandler(void *CallBackRef)
+{
+	static int sec = 0;
+
+	XScuTimer *TimerInstancePtr = (XScuTimer *)CallBackRef;
+	XScuTimer_ClearInterruptStatus(TimerInstancePtr);
+	sec++;
+	printf("%d Second\n\r", sec);
 }
 ```
