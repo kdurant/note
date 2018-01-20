@@ -21,35 +21,46 @@
 
 # 10.2 帧信息（FIS）
 ## 10.2.1 概述
-FIS是一组如前所述的在主机和设备之间传递信息的双字。原语用于定义FIS的边界，并可以插入以控制信息流的速度。 本部分描述了FIS的信息内容 - 被称为有效载荷 - 并且假设读者意识到支持信息内容所需的原语
-
-本部分描述的FIS的信息内容 - 被称为有效载荷 - 并且假设读者意识到支持信息内容所需的原语。
+FIS是一组如前所述的在主机和设备之间传递信息的双字。`原语用于定义FIS的边界`，并可以插入以控制信息流的速度。 本部分描述了FIS的信息内容 - 被称为有效载荷 - 并且假设读者意识到支持信息内容所需的原语
 
 信息字段的内容分为三类：（1）寄存器类型，（2） 设置类型，（3）数据类型。 对于每个类别，每个框架的组织在下一节中定义。
 
 ## 10.2.2 有效载荷内容
-有效载荷的类型和布局由位于有效载荷的第一个双字节的字节0中的帧信息类型字段指示。
-![](https://github.com/kdurant/sata_controller/blob/master/doc/pic/ch10/Figure194.png?raw=true)
+有效载荷的类型和布局由位于有效载荷的`第一个双字节的字节0`中的帧信息类型字段指示。
+![Table73](https://github.com/kdurant/sata_controller/blob/master/doc/pic/ch10/Table73.png?raw=true)
 
-此示例类型主要用于将影子寄存器块寄存器的内容从主机传输到设备。
+![Figure194](https://github.com/kdurant/sata_controller/blob/master/doc/pic/ch10/Figure194.png?raw=true)
 
-可以引用 Table 73 来刷新读取器对ATA适配器的影子寄存器块组织的简化版本的存储器。
+此示例类型主要用于将影子寄存器块寄存器的内容从主机传输到设备。可以引用Table 73来刷新读取器对ATA适配器的影子寄存器块组织的简化版本的存储器。
 
-以下部分详细介绍了可能的有效载荷类型。 SOFP，EOFP和HOLDP原语已被清除。
+以下部分详细介绍了可能的有效载荷类型。 SOFp，EOFp和HOLDp原语已被清除。
 
 # 10.3 FIS类型
 以下部分定义了每个FIS的结构
 
 ## 10.3.1 FIS类型值
 
-所有FIS类型字段的值已经提供额外的稳定性。
-
-在可能不缓存完整FIS的最小缓冲实现中，状态机可以在结束CRC被检查之前开始根据所接收的FIS类型值进行操作。
-
-因为FIS类型值可以在完整FIS的完整性之前对其终止CRC进行检查，所以已经选择了FIS类型字段值以最大化它们之间的Hamming距离
+所有FIS类型字段的值已经提供额外的稳定性。在可能不缓存完整FIS的最小缓冲实现中，状态机可以在结束CRC被检查之前开始根据所接收的FIS类型值进行操作。因为FIS类型值可以在完整FIS的完整性之前对其终止CRC进行检查，所以已经选择了FIS类型字段值以最大化它们之间的Hamming距离
 
 Figure 193 列举了FIS类型值及其赋值
-![](https://github.com/kdurant/sata_controller/blob/master/doc/pic/ch10/Figure193.png?raw=true)
+![Figure193](https://github.com/kdurant/sata_controller/blob/master/doc/pic/ch10/Figure193.png?raw=true)
+
+Type filed value | Description
+-----------------|---------------
+27h     | Register FIS - Host to Device
+34h     |Register FIS – Device to Host
+39h     |DMA Activate FIS – Device to Host
+41h     |DMA Setup FIS – Bi-directional
+46h     |Data FIS – Bi-directional
+58h     |BIST Activate FIS – Bi-directional
+5Fh     |PIO Setup FIS – Device to Host
+A1h     |Set Device Bits FIS – Device to Host
+A6h     |Reserved for future Serial ATA definition
+B8h     |Reserved for future Serial ATA definition
+BFh     |Reserved for future Serial ATA definition
+C7h     |Vendor specific
+D4h     |Vendor specific
+D9h     |Reserved for future Serial ATA definition
 
 ### 10.3.1.1 未认证的FIS类型
 设备或主机可能会收到未在图193中定义或供应商特定的FIS类型。
