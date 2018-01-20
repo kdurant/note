@@ -29,8 +29,7 @@ FIS是一组如前所述的在主机和设备之间传递信息的双字。原�
 
 ## 10.2.2 有效载荷内容
 有效载荷的类型和布局由位于有效载荷的第一个双字节的字节0中的帧信息类型字段指示。
-
- Figure 194 
+![](https://github.com/kdurant/sata_controller/blob/master/doc/pic/ch10/Figure194.png?raw=true)
 
 此示例类型主要用于将影子寄存器块寄存器的内容从主机传输到设备。
 
@@ -50,6 +49,7 @@ FIS是一组如前所述的在主机和设备之间传递信息的双字。原�
 因为FIS类型值可以在完整FIS的完整性之前对其终止CRC进行检查，所以已经选择了FIS类型字段值以最大化它们之间的Hamming距离
 
 Figure 193 列举了FIS类型值及其赋值
+![](https://github.com/kdurant/sata_controller/blob/master/doc/pic/ch10/Figure193.png?raw=true)
 
 ### 10.3.1.1 未认证的FIS类型
 设备或主机可能会收到未在图193中定义或供应商特定的FIS类型。
@@ -129,7 +129,7 @@ There is no Device-to-Host FIS transmitted after a Serial ATA CRC error on the l
 为了避免不必要的开销，只有在从前一个值改变状态时才将该FIS传送到设备。
 
 ## 10.3.5 Device to Host
-Figure 195
+![](https://github.com/kdurant/sata_controller/blob/master/doc/pic/ch10/Figure195.png?raw=true)
 
 字段定义：
 FIS类型 - 设置为34h的值。 定义其余的FIS字段。 将FIS的长度定义为五个Dword。

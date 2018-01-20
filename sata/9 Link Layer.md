@@ -44,10 +44,10 @@
 
 下面的图190，显示了各种表示之间的关系。
 
-![enter image description here](https://github.com/kdurant/sata_controller/blob/master/doc/pic/ch9/Figure190.png)
+![](https://github.com/kdurant/sata_controller/blob/master/doc/pic/ch9/Figure190.png?raw=true)
 
 下面的表54显示了控制字节和数据字节从字节符号到字符符号的转换。 所选择的例子具有特殊意义，并且在从数据符号到8b / 10b代码值的转换中也被使用。
-table 54
+![](https://github.com/kdurant/sata_controller/blob/master/doc/pic/ch9/Table54.png?raw=true)
 
 ## 9.2.2 字符码
 串行ATA使用的编码方案将未编码的数据和控制字节转换为字符。 然后，编码的字符由Phy层通过串行线路传输，从Phy层接收并解码为相应的字节和控制值。
