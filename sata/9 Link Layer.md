@@ -159,3 +159,8 @@ X_RDYp      |D23.2      |D23.2      |D21.5      |K28.3
 
 
 # 9.6 连接层状态机
+
+## 9.6.1 连接层使用到的术语
+
+1. LRESET：连接层COMRESET或者COMINIT信号
+2. PHYRDYn：
