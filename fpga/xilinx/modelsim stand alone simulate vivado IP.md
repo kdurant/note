@@ -1,6 +1,15 @@
 # 软件环境
 * vivado2017.4
 * modelsim10.5
+[ug973](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_1/ug973-vivado-release-notes-install-license.pdf)
+> vivado2016.1 modelsim10.4d
+> vivado2016.2 modelsim10.4d
+> vivado2016.3 modelsim10.5c
+> vivado2016.4 modelsim10.5c
+> vivado2017.1 modelsim10.5c
+> vivado2017.2 modelsim10.5c
+> vivado2017.3 modelsim10.6b
+> vivado2017.4 modelsim10.6b
 
 # 准备工作
 1. [使用vivado编译好modelsim仿真需要的库文件](http://blog.163.com/hardware_engineer/blog/static/25836606620168141519404?ignoreua)
