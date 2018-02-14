@@ -1,4 +1,4 @@
-deque（double-end queue）和vector类似，不同之处在于，deque提供了二级数组结构，第一级完全类似于vector，代表实际容器；另一级维护容器的首位地址。这样，deque除了具有vector的所有功能外，还支持高效的首/尾端插入/删除操作。
+[deque](http://www.yesky.com/100/1889600.shtml)（double-end queue）和vector类似，不同之处在于，deque提供了二级数组结构，第一级完全类似于vector，代表实际容器；另一级维护容器的首位地址。这样，deque除了具有vector的所有功能外，还支持高效的首/尾端插入/删除操作。
 
  deque是在功能上合并了vector和list
 

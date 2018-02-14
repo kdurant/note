@@ -12,3 +12,34 @@
 1. 如果你需要高效的随即存取，而不在乎插入和删除的效率，使用vector
 2. 如果你需要大量的插入和删除，而不关心随机存取，则应使用list
 3. 如果你需要随机存取，而且关心两端数据的插入和删除，则应使用deque
+
+[list 使用](https://www.cnblogs.com/lalalabi/p/5060210.html)
+# 构造方法
+```cpp
+list<int> c0;   // 空链表
+list<int> c1(3);    // 建一个含三个默认值是0的元素的链表
+list<int> c2(5, 2); // 建一个含五个元素的链表，值都是2
+list<int> c3(c2);   // 建一个c2的copy链表
+list<int> c4(c1.begin(), c1.end())  // c4含c1一个区域的元素[_First, _Last)
+
+# 添加元素
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <list>
+
+using namespace std;
+
+int main(void)
+{
+
+    list<int> c0;
+    c0.push_back(3);    // 链表末尾添加元素
+    c0.push_front(4);   // 链表前端添加元素
+    c0.assign(3, 10);   // 清空链表，并添加3个值为10的元素
+
+    for (list<int>::iterator iter = c0.begin(); iter != c0.end(); iter++)
+        cout << *iter << endl;
+    return 0;
+}
+```

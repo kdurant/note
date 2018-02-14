@@ -1,0 +1,1 @@
+[七大查找算法](https://www.cnblogs.com/yw09041432/p/5908444.html)

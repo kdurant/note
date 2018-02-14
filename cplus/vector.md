@@ -6,10 +6,11 @@ vector是一个封装了动态数组的顺序容器，能够增加压缩数据
 vector<int> v;       //创建一个vector, int为数组元素的数据了下，v为动态数组名
 vector<int> v2(v);   // v2是v的一个副本，拷贝构造函数
 vector<int> v3(n, data);   // v3包含n个值为data的元素
-vector<int> v4(n);  // v4含有值初始化的元素的n个副本
+vector<int> v4(n);  // v4含10个有值初始化为0的元素
+vector<int> v5{1, 2, 3, 4}  // 构造大小为4，并初始化里面的各个元素
 ```
 
-# vector长度
+# vector元素个数
 ```cpp
 v.size();
 ```
@@ -27,9 +28,6 @@ for(it = v.begin(); it != v.end(); it++)
     cout << *it << endl;
 ```
 # 从尾部插入元素
-```cpp
-
-```
 ```cpp
 v.push_back(data);
 ```
@@ -57,6 +55,41 @@ v.celar();
 # vector状态
 ```cpp
 v.empty() == true;
+```
+
+# 对元素排序
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+vector<int> intVector(100);
+int main(void)
+{
+
+    vector<int> v{5, 2, 3, 4};
+
+    sort(v.begin(), v.end());
+    vector<int>::iterator iter;
+    for (iter = v.begin(); iter != v.end(); iter++)
+    {
+        cout << *iter << endl;
+    }
+    return 0;
+}
+```
+
+# 反转容器
+```cpp
+reverse(v.begin(), v.end());
+```
+
+# 交换元素
+```cpp
+swap(v[m], v[n]);
 ```
 
 # 注意
