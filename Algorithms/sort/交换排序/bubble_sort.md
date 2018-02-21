@@ -7,10 +7,12 @@
 
 3. 针对所有的元素重复以上的步骤，除了最后一个。
 
-4. 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。[1] 
+4. 持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。
 
 
 ```c
+#include <stdio.h>
+
 void bubble_sort(int *data, int len)
 {
     int temp;
@@ -26,5 +28,15 @@ void bubble_sort(int *data, int len)
             }
         }
     }
+}
+
+int main(void)
+{
+    int a[7] = { 40, 9, 20, 3, 5, 33, 4 };
+    bubble_sort(a, 7);
+
+    for (int i = 0; i < 7; i++)
+        printf("%d\n", a[i]);
+    return 0;
 }
 ```
