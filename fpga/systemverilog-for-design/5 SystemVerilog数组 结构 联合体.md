@@ -1,3 +1,65 @@
+SystemVerilog对Verilog添加了几个增强，用于表示大量数据。Verilog数组结构在数据表示方式和数组操作方面都得到了扩展。结构和联合类型已经添加到Verilog中，作为表示变量集合的一种方法。
+本节介绍：
+* 结构体
+* 联合
+* 结构体和联合的操作
+* 未压缩数组
+* 数组操作
+* foreach循环
+* 数组的系统函数
+* $bit系统函数
+
+# 5.1 结构体
+设计的数据通常是有逻辑的信号组，例如总线协议的所有控制信号，或状态控制器中使用的所有信号。Verilog语言没有一种方便的机制来将公共信号收集到一个组中。相反，设计器必须使用特殊分组方法，例如命名约定，其中组中的每个信号以一组通用字符开始或结束。
+
+> 结构体和C语言定义类似。
+SystemVerilog添加了和C语言类似的结构体。结构是将多个相关信息组合在一起的一种方便的方式。使用struct关键字声明结构。结构成员可以是任何变量类型，包括用户定义的类型和任何常量类型.。一个结构声明示例是：
+```verilog
+struct {
+    int a, b; // 32-bit variables
+    opcode_t opcode; // user-defined type
+    logic [23:0] address; // 24-bit variable
+    bit error; // 1-bit 2-state var.
+} Instruction_Word;
+```
+> C语言中的tag是不需要的
+SystemVerilog中的结构声明语法非常类似于C语言。一个不同之处是C允许在struct关键字之后和开始大括号之前使用可选的“tag”。SystemVerilog不允许tag。
+> 结构是变量和/或常量的集合。
+结构是一个变量和/或常量在一个名称下的集合。可以使用结构的名称引用整个集合。结构中的每个成员都有一个名称，用于从结构中选择它。引用结构成员与在C中引用相同。
+```verilog
+<structure_name>.<variable_name>
+```
+> 结构体和数组不同的地方
+结构不同于数组，因为数组是所有类型和大小相同的元素的集合，而结构是变量和/或常量的集合，可以是不同的类型和大小。另一个不同之处是，数组的元素被索引引用到数组中，而结构的成员则由成员名引用。
+
+# 5.1.1 结构体声明
+> 变量或者线网可以作为结构体成员
+结构体是变量的集合，可以单独或作为一个整体访问。可以使用var关键字将结构作为一个整体声明为变量。还可以使用任何Verilog网络类型(如wire或tri)将结构定义为网络。当定义为net类型时，结构的所有成员都必须是4状态类型.
+```verilog
+var struct { // structure variable
+    logic [31:0] a, b;
+    logic [ 7:0] opcode;
+    logic [23:0] address;
+} Instruction_Word_var;
+wire struct { // structure net
+    logic [31:0] a, b;
+    logic [ 7:0] opcode;
+    logic [23:0] address;
+} Instruction_Word_net
+```
+将结构体声明为`var`或者`wire`是可选的。如果没有指定，默认为`var`。
+```verilog
+struct { // structure variable
+    logic [31:0] a, b;
+    logic [ 7:0] opcode;
+    logic [23:0] address;
+} Instruction_Word_var;
+```
+注意，虽然结构作为一个整体可以被声明为一个线网类型，但是在结构中不能使用`wire`类型。`wire`可以组合在一起作为`interface`使用，这将在10章介绍。
+
+** 类型化匿名结构**
+> 结构体可以使用自定义类型
+
 # 5.3 数组
 ## 5.3.1 未压缩数组
 Verilog中数组的声明方式为
