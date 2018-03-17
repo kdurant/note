@@ -38,3 +38,10 @@ dtype('int32')
 
 
 # 随机数
+
+
+# randint()
+```python
+r0 = np.random.randint(80, 100)         # 产生一个随机数
+r0 = np.random.randint(80, 100, size=(2,3))     # 
+```
