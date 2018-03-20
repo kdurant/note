@@ -63,3 +63,9 @@ print(rr.findall(tt))   # 在tt中查找所有包含'oo'的单词
 
 >>> ['good', 'cool']
 ```
+
+## match
+```python
+match(pattern, string, flags=0)
+
+```
