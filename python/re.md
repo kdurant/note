@@ -4,18 +4,18 @@
 ```python
 findall(pattern, string, flags=0)
 ```
-返回string中所有与pattern相匹配的全部字串，返回形式为数组
+返回string中所有与pattern相匹配的全部字符串的列表
 ```python
 import re
 animal = 'dog cat bird cat dog cat duck fuck'
-re.findall('cat', animal)
->>> ['cat', 'cat', 'cat']
+>>> re.findall('cat', animal)
+['cat', 'cat', 'cat']
 
-re.findall('dog.+dog', animal)
->>> ['dog cat bird cat dog']
+>>> re.findall('dog.+dog', animal)
+['dog cat bird cat dog']
 
-re.findall('.uck', animal)
->>> ['duck', 'fuck']
+>>> re.findall('.uck', animal)
+['duck', 'fuck']
 ```
 
 ## re.sub
@@ -30,7 +30,7 @@ sub(pattern, repl, string, count=0, flags=0)
 `count`：由于正则表达式匹配到的结果是多个，使用count来限定替换的个数（顺序为从左向右），默认值为0，替换所有的匹配到的结果。
 `flags`是匹配模式，可以使用按位或’|’表示同时生效，也可以在正则表达式字符串中指定。
 
-## compile()
+## re.compile()
 
 将正则表达式模式编译成一个正则表达式对象，它可以用于匹配使用它的`match()`和`search()`方法。
 格式如下：
@@ -59,13 +59,35 @@ re.U            | 	根据Unicode字符集解析字符，这个标志影响\w,\W,
 import re
 tt = "Tina is a good girl, she is cool, clever, and so on..."
 rr = re.compile(r'\w*oo\w*')
-print(rr.findall(tt))   # 在tt中查找所有包含'oo'的单词
-
->>> ['good', 'cool']
+>>> print(rr.findall(tt))   # 在tt中查找所有包含'oo'的单词
+['good', 'cool']
 ```
 
-## match
+## re.match
 ```python
 match(pattern, string, flags=0)
-
 ```
+总是从string的头部开始查找pattern，没有找到返回None
+
+```python
+p = re.compile(r'hello')
+r1 = re.match(p, 'hello123')
+print(r1.group())
+
+r2 = re.match(pattern, '123hello')
+>>> print(r2)
+None
+```
+
+## re.search
+```python
+search(pattern, string, flags=0)
+```
+对整个字符串进行搜索，并返回第一个匹配的字符串的match对象
+```python
+p = re.compile(r'hello')
+r1 = re.search(p, '123hello123')
+
+>>> print(r1)
+<_sre.SRE_Match object; span=(3, 8), match='hello'>
+
