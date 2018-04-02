@@ -32,6 +32,8 @@ b101                    | 32
 b110                    | 64
 b111                    | 128
 
+# 复位信号
+低电平复位
 
 # valid信号
 1. `s_axi_awvalid`和`s_axi_wvalid`可以一起给出

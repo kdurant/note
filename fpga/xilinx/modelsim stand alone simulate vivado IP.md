@@ -41,8 +41,14 @@ vmap unimacro_ver       $env(VIVADO_SIM)/unimacro_ver
 vmap unisim             $env(VIVADO_SIM)/unisim
 vmap unisims_ver        $env(VIVADO_SIM)/unisims_ver
 
+#仿真需要的其他库
+vmap tri_mode_ethernet_mac_v9_0_10  $env(VIVADO_SIM)/tri_mode_ethernet_mac_v9_0_10
+
 vlog -incr $env(VIVADO_SIM)/glbl.v
 vlog -sv -incr ../../led.srcs/sim_1/new/top_tb.sv
+
+vlib work
+vmap work work
 
 # 有的IP没有`sim`目录
 # 有的IP需要的不止一个文件
@@ -66,5 +72,16 @@ run 10us
 ```
 
 # modelsim工程
-1. 输入`do demo.tcl`，脚本文件里包含了常用的库文件，但仿真IP时也可能会提示某些模块没法例化
-2. 根据提示，在vsim后 添加`-L other_need_lib`，直到不提示确实仿真库为止
+1. 
+```tcl
+vcom -work axi_lite_ipif_v3_0_4 -64 -93 \
+"../../../ipstatic/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd" \
+```
+---->>>>
+```tcl
+vcom ../../../ipstatic/hdl/axi_lite_ipif_v3_0_vh_rfs.vhd
+```
+
+
+2. 输入`do demo.tcl`，脚本文件里包含了常用的库文件，但仿真IP时也可能会提示某些模块没法例化
+3. 根据提示，在vsim后 添加`-L other_need_lib`，直到不提示确实仿真库为止
