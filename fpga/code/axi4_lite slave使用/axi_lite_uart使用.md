@@ -1,5 +1,5 @@
 以下操作在完成对axi4-lite总线初始配置的情况下
-# 从axi4_lite_uart中读出接受到的数据
+# 从axi4_lite_uart中读出uart接受到的数据
 1. `CTRL_REG(0CH)`写入0x00000010，使能中断
 2. 等待`interrupt`信号有效后去读取数据
 > 如果`interrupt`有效时，数据没有被及时读出，下一个叔叔到达时interrupt不会再次有效
@@ -10,9 +10,9 @@
 > interrupt无效，读数据时，`s_axi_rdata == 8'hxx; s_axi_rresp = 2`
 > `s_axi_rdata`的低8位为接收到的有效数据
 
-# 写
+# uart发送数据
 1. `CTRL_REG`写入0x00000001, 复位`Tx FIFO`
-2. `Tx FIFO`写入数据
+2. `Tx FIFO(04H)`写入数据
 3. 写地址和写数据需要同时给出信号
 > `s_axi_wstrb`无效，不论是全0还是全1，皆是`s_axi_wdata`的低8位写到`tx`引脚上
 
