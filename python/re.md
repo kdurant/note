@@ -7,7 +7,7 @@ findall(pattern, string, flags=0)
 返回string中所有与pattern相匹配的全部字符串的列表
 ```python
 import re
-animal = 'dog cat bird cat dog cat duck fuck'
+animal = 'dog catv bird cat dog cat duck fuck'
 >>> re.findall('cat', animal)
 ['cat', 'cat', 'cat']
 
