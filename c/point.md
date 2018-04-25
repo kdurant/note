@@ -1,3 +1,33 @@
+# 数组 指针区别
+
+## sizeof值不同
+```c
+#include <stdio.h>
+
+int main(void)
+{
+    char buf[10] = "study";
+    char *pstr = "study";
+
+    printf("%d\n", sizeof(buf));
+    printf("%d\n", sizeof(pstr));
+}
+```
+sizeof(数组名)得到的是数组所有元素的字节数
+sizeof(指针名)得到的是指针本身所占内存的大小(32位系统是4字节，64位系统是8字节)
+
+## 增量运算符
+* 可以对指针进行增量操作
+* 不可以对数据名进行增量操作
+```c
+char buf[10] = "study";
+char *pstr = "study";
+
+printf("%c\n", *pstr++);    // 正确
+printf("%c\n", *buf++);     // 不正确
+// buf是数组名，是数组的地址，是常量，不可作为左值。
+```
+
 # 二维数组
 
 ## 定义
@@ -66,6 +96,12 @@ void show_array(char **p, int len)
     }
 }
 ```
+
+# 数组指针
+```c
+int (*p)[3];
+```
+()优先级大于[]，所以先看*p，说明是指针。再与[]结合，说明指针指向的内容数数组
 
 # void指针
 
