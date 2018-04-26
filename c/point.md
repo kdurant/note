@@ -145,5 +145,75 @@ typedef void (*tp_func)(int, int, float);       //只是定义了函数指针类
 tp_func p_func = NULL;
 ```
 
+```c
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+int sum(int a, int b);
+
+typedef int(*fun_tp)(int a, int b); 
+
+int main()
+{
+    int (*fun_p)(int a, int b);     // 声明函数指针
+    fun_tp tp;
+
+    fun_p = sum;
+    tp = sum;
+    printf("%d\n", fun_p(3, 2));
+    printf("%d\n", tp(3, 2));
+    return 0;
+}
+
+int sum(int a, int b)
+{
+    return a + b;
+}
+```
 # 回调函数
 回调函数就是一个通过函数指针调用的函数。如果你把`函数的指针（地址）作为参数`传递给另一个函数，当这个指针被用来调用其所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的，用于对该事件或条件进行响应。
+
+```c
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+typedef int(*fun_tp)(int a, int b);
+
+int process_typedef(int a, int b, fun_tp func);
+int process_default(int a, int b, int (*func)(int, int));
+
+int sum(int a, int b);
+int sub(int a, int b);
+
+int main()
+{
+    int result;
+    result = process_typedef(3, 2, sum);
+    printf("%d\n", result); 
+    result = process_default(2, 3, sub);
+    printf("%d\n", result);
+    return 0;
+}
+
+int process_typedef(int a, int b, fun_tp func)
+{
+    return func(a, b);
+}
+
+int process_default(int a, int b, int(*func)(int, int))
+{
+    return func(a, b);
+}
+
+int sum(int a, int b)
+{
+    return a + b;
+}
+
+int sub(int a, int b)
+{
+    return a - b;
+}
+```
