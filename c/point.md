@@ -67,6 +67,7 @@ void show_array(char (*p)[20], int len)
 > * 和 p 构成一个指针的定义，指针名是 p， char 修饰的是数组的内容
 > 即数组里的每个元素。数组在这里并没有名字，是个匿名数组
 
+![pic](https://images0.cnblogs.com/blog/256716/201310/22201218-19ddd896ae6a45e1b61c7e3ee59b4662.jpg)
 # 指针数组
 
 ## 定义
@@ -97,7 +98,6 @@ void show_array(char **p, int len)
 }
 ```
 
-<<<<<<< HEAD
 # 数组指针
 数组指针也称指向一维数组的指针，亦称行指针。
 ```c
