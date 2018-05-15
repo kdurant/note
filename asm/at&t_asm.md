@@ -22,8 +22,13 @@
 
 # 指令
 
-## movl
-1. 特别需要指出的是`变址内存模式(indexed memory mode)`
+## call
+函数调用指令
+1. 将下一条指令的地址即返回地址压入栈中（所以， esp地址会减小4或者8）
+2. 修改指令指针`eip`以指向函数起始处
+
+# 寻址方式
+* `变址内存模式(indexed memory mode)`, 索引寻址方式
 >> base_address(offset_address, index, size)
 任意值为0，就可以忽略。 offset_address和index的值必须是`寄存器`
 
@@ -33,11 +38,17 @@ movl    values(, %edi, 4), %eax
 ```
 将values标签开始的第三个4字节的内存值加载到EAX寄存器中
 
+* 间接寻址方式
+从寄存器指定的地址加载值
+>> move (%eax), %ebx
 
-2. 
+* 基址寻址方式
+和间接寻址方式类似，不同之处在于它将一个常量值与寄存器中的地址相加
 ```asm
 movl    %ebx,   %edi    ;将ebx的值加载到edi寄存器中
 movl    %ebx,   (%edi)  ;将ebx的值传送edi寄存器中所包含的内存位置
 
 movl    %ebx,   4(%edi)  ;将ebx的值传送edi寄存器内容所指向内存位置之后4个字节的内存位置
 ```
+
+3. 
