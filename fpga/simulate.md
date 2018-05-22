@@ -27,6 +27,7 @@
         begin
             @ (posedge bfm.data_clk);
             code = $fscanf(fd, "%d", bfm.adc_din); 
+            //code = $fscanf(fd, "%d %d %d", d1, d2, d3); 
         end
         @ (posedge bfm.data_clk);
         bfm.adc_din = '0;
