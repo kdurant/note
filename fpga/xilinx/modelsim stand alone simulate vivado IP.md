@@ -10,6 +10,8 @@
 > vivado2017.2 modelsim10.5c
 > vivado2017.3 modelsim10.6b
 > vivado2017.4 modelsim10.6b
+> vivado2018.1 modelsim10.6c
+> vivado2018.2 modelsim10.6c
 
 # 准备工作
 1. [使用vivado编译好modelsim仿真需要的库文件](http://blog.163.com/hardware_engineer/blog/static/25836606620168141519404?ignoreua)
