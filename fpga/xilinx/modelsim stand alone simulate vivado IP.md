@@ -1,5 +1,5 @@
 # 软件环境
-* vivado2017.4
+* vivado2017.2
 * modelsim10.5
 [ug973](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2017_1/ug973-vivado-release-notes-install-license.pdf)
 > vivado2016.1 modelsim10.4d

@@ -22,3 +22,7 @@ git submodule add module_addr
     test：增加测试
     save：单纯地保存记录
     other：用于难以分类的类别（不建议使用，但一些如删除不必要的文件，更新.ignore之类的可以使用）
+
+# 修改远程仓库地址
+git remote 查看所有远程仓库， git remote xxx 查看指定远程仓库地址
+git remote set-url origin http://192.168.100.235:9797/john/git_test.git
