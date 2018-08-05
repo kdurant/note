@@ -924,6 +924,78 @@ def closeEvent(self, event):
 ```
 
 ## paintEvent
+QPainter的常见用法是在widget的绘制事件中：构造和自定义（例如设置笔或画笔）画家。然后画画。记得在绘图后销毁QPainter对象。例如：
+
+```python
+from PyQt5.QtGui import QPainter, QColor, QFont
+from PyQt5.QtCore import Qt
+from PyQt5.QtWidgets import QApplication, QWidget
+
+class PyQt5_Paint(QWidget):
+    def __init__(self):
+        super(PyQt5_Paint, self).__init__()
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle('PyQt5_Temp')
+
+    def paintEvent(self, event):
+        qp = QPainter()
+        qp.begin(self)
+        qp.setFont(QFont("Arial", 30))
+        qp.setPen(QColor(162, 39, 43))
+        qp.drawText(event.rect(), Qt.AlignCenter, 'Qt')
+        qp.end()
+
+
+if __name__ == '__main__':
+    import sys
+    app = QApplication(sys.argv)
+
+    ui = PyQt5_Paint()
+    ui.show()
+    sys.exit(app.exec_())
+```
+### 画直线
+```python
+p.drawLine( QRect(50, 100, 300, 200).topLeft(),  QRect(50, 100, 300, 200).topRight())
+p.drawLine(QLine(10, 10, 30, 30))
+```
+
+### 画矩形
+```python
+p.setBrush(QColor(88, 99, 100))
+# setBrush设置填充区域颜色
+p.drawRect(QRect(50, 100, 300, 200))
+```
+
+### 绘制圆角矩形
+```python
+p.setBrush(QColor(88, 99, 100))
+# setBrush设置填充区域颜色
+p.drawRoundedRect(QRect(50, 100, 300, 200), 20, 20, Qt.RelativeSize)
+```
+
+### 绘制椭圆
+```python
+ p.drawEllipse(QRect(150, 200, 300, 200))
+ ```
+### 绘制多边形
+```python
+points = [QPoint(150, 100), QPoint(300, 150), QPoint(350, 250), QPoint(100, 300)]
+p.drawPolygon(QPolygon(points), Qt.WindingFill)
+```
+
+### 绘制折线
+```python
+points = [QPoint(150, 100), QPoint(300, 150), QPoint(350, 250), QPoint(100, 300)]
+p.drawPolyline(QPolygon(points))
+```
+
+### 绘制饼状
+```python
+p.drawPie(QRect(100, 150, 300, 200), 30*2, 120*16)
+```
 
 ## 事件过滤
 ```python
