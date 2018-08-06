@@ -101,7 +101,6 @@ if __name__ == "__main__":
 
 # 标签 QLabel
 ```python
-# -*- coding: utf-8 -*-
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
@@ -150,8 +149,6 @@ if __name__ == "__main__":
 
 # 按键 QPushButton
 ```python
-# -*- coding: utf-8 -*-
-
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
@@ -196,8 +193,6 @@ if __name__ == "__main__":
 
 # 行文本输入 QLineEdit
 ```python
-# -*- coding: utf-8 -*-
-
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
@@ -980,6 +975,7 @@ p.drawRoundedRect(QRect(50, 100, 300, 200), 20, 20, Qt.RelativeSize)
 ```python
  p.drawEllipse(QRect(150, 200, 300, 200))
  ```
+
 ### 绘制多边形
 ```python
 points = [QPoint(150, 100), QPoint(300, 150), QPoint(350, 250), QPoint(100, 300)]
@@ -999,7 +995,6 @@ p.drawPie(QRect(100, 150, 300, 200), 30*2, 120*16)
 
 ## 事件过滤
 ```python
-#-*- coding:utf-8 -*-
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
@@ -1058,8 +1053,6 @@ if __name__ == "__main__":
 
 ## 折线图
 ```python
-
-#-*- coding:utf-8 -*-
 import random
 from PyQt5.QtChart import QChart, QLineSeries, QChartView, QValueAxis
 from PyQt5.QtWidgets import *
