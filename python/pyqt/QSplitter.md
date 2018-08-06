@@ -1,9 +1,11 @@
 # QSplitter
+分割窗口类。
+
 QSplitter里无法添加Layout对象，只能添加Widget对象
 ```python
         # 1. 声明
         top_splitter = QSplitter(Qt.Horizontal)
-        # 2. 讲布局好的Layout对象添加到QFrame里
+        # 2. 将布局好的Layout对象添加到QFrame里
         frame1 = QFrame()
         frame1.setLayout(left_vlyt)
         frame2 = QFrame()
