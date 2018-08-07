@@ -26,3 +26,6 @@ git submodule add module_addr
 # 修改远程仓库地址
 git remote 查看所有远程仓库， git remote xxx 查看指定远程仓库地址
 git remote set-url origin http://192.168.100.235:9797/john/git_test.git
+
+# 提交非master分支
+git push origin test:test              // 提交本地test分支作为远程的test分支
