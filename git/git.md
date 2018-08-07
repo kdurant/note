@@ -37,3 +37,27 @@ git remote set-url origin http://192.168.100.235:9797/john/git_test.git
 
 # 将远程git仓库里的指定分支拉取到本地（本地不存在的分支）
 > git pull origin master:wy
+
+# rebase
+
+假定已有commit如下：
+                    M4 -> M5 -> M6 (master)
+M1 -> M2 -> M3 -> 
+                    D1 -> D2 -> D3 (dev)
+
+发现需要在M2的基础上进行修改共同的文件，可以在M2上建立新的分支，修改后rebase。
+
+具体流程
+1. 在M2建立新分支`test`
+2. 切换到新分支
+3. 修改代码并提交
+4. 切换到master分支，执行`git rebase test`
+5. 切换到dev分支，执行`git rebase test`
+
+说明：
+1. 新的commit记录
+                           M4 -> M5 -> M6 (master)
+M1 -> M2 -> R1 -> M3 ->    
+                           D1 -> D2 -> D3 (dev)
+
+2. `以上操作建立在rebase时没有冲突的情况下`
