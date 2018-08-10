@@ -1,6 +1,45 @@
-# Event
+# 鼠标
 
 ## 鼠标事件
+1. mousePressEvent(self, event) 鼠标键按下时调用
+2. mouseReleaseEvent(self, event) 鼠标键松开时调用
+3. mouseDoubleClickEvent(self, event) 双击鼠标时调用
+4. wheelEvent(self, event) 处理鼠标滚动
+
+```python
+import sys
+from PyQt5.QtCore import Qt, QPointF, pyqtSignal
+from PyQt5.QtGui import QPainter, QPolygonF
+from PyQt5.QtWidgets import QWidget, QApplication, QMessageBox
+
+class Demo(QWidget):
+    """
+    相关API测试
+    """
+    def __init__(self):
+        super(Demo, self).__init__()
+    
+    def initUI(self):
+        pass
+    
+    def mousePressEvent(self, event):
+        QWidget.mousePressEvent(self, event)
+        print(event.button())           # 
+        print(event.x())                # 鼠标按下是的x坐标
+        print(event.y())                # 鼠标按下时的y坐标
+        print(event.pos())
+        print(event.localPos())         # 鼠标按下时坐标的浮点精度表示
+
+        print(event.globalPos())        # 相对于屏幕的鼠标 坐标
+        print(event.timestamp())
+
+if __name__ == '__main__':
+    app = QApplication(sys.argv)
+    window = Demo()
+    window.show()
+    sys.exit(app.exec_())
+```
+
 ```python
      def mouseReleaseEvent(self, event):
         print('mouse release')
@@ -25,6 +64,9 @@
         elif event.angleDelta().y() < 0:
             print('down')
 ```
+
+# 按键事件
+
 ## closeEvent
 ```python
 def closeEvent(self, event):
