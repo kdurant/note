@@ -1,3 +1,8 @@
+# 分支命名
+1. feature/
+2. hotfix/
+3. realease/
+
 # 子模块使用
 ## 添加子模块
 在顶级项目的目录里添加子模块
@@ -61,3 +66,13 @@ M1 -> M2 -> R1 -> M3 ->
                            D1 -> D2 -> D3 (dev)
 
 2. `以上操作建立在rebase时没有冲突的情况下`
+
+# tag操作
+
+## push本地tag到远程仓库
+git push origin --tags
+
+## pull远程tag到本地
+
+## 删除远程tag
+git push origin --delete tag v1.2.2
