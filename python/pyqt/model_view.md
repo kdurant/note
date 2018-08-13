@@ -1,6 +1,6 @@
 # [概述](http://www.codebelief.com/article/2017/04/qt-model-view-tutorial/)
 关于视图模型，Qt已经封装了几个方便我们使用的类：QListWidget、QTreeWidget和QTabWidget，这几个类特点是使用起来很方便，适合显示比较简单的数据，若是涉及到大量的数据要显示、以及对性能要求严格就得用到视图模型了。
-[Model/View框架(http://blog.51cto.com/9291927/1879117)
+[Model/View框架](http://blog.51cto.com/9291927/1879117)
 
 # [QStandardItemModel](https://www.zhaokeli.com/article/7986.html)
 模型提供数据，视图展示数据。所以数据及数据的相关信息（如文本大小、颜色、数据类型等）由模型类（QStandardItemModel）管理，数据的显示（如表格是否可以编辑、选择方式、行列的大小策略等）由视图类（QTableView）管理。
