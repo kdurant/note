@@ -9,10 +9,10 @@
 - modelsim 仿真工程相关文件
     * func1 功能1测试工程
     * func2 功能2测试工程
+- ip        使用到的IP核相关文件
+    - ip1
+    - ip2 
 - fpga 存放FPGA工程相关文件
-    * ip        使用到的IP核相关文件
-        - ip1
-        - ip2 
     * others
 - README.md  记录设计参数，系统结构，注意事项等等
 - DEBUG.md 记录调试过程中的一些问题
@@ -22,6 +22,9 @@
 
 - doc  
 - src
+- ip        使用到的IP核相关文件
+    - ip1
+    - ip2 
 - bench  测试相关代码
 - modelsim 仿真工程相关文件
 
