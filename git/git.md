@@ -28,11 +28,12 @@ git submodule add module_addr
     save：单纯地保存记录
     other：用于难以分类的类别（不建议使用，但一些如删除不必要的文件，更新.ignore之类的可以使用）
 
-# 修改远程仓库地址
+# 远程仓库操作
+## 修改远程仓库地址
 git remote 查看所有远程仓库， git remote xxx 查看指定远程仓库地址
 git remote set-url origin http://192.168.100.235:9797/john/git_test.git
 
-# 提交新的本地分支到远程仓库
+## 提交新的本地分支到远程仓库
 1. 切换到需要提交的分支
 2. 推送本地分支到远程分支
 > git push --set-upstream origin 分支名
@@ -40,8 +41,11 @@ git remote set-url origin http://192.168.100.235:9797/john/git_test.git
 > git push origin HEAD -u
 3. 以后push新分支使用：git push origin wy:wy  ？？？
 
-# 将远程git仓库里的指定分支拉取到本地（本地不存在的分支）
+## 将远程git仓库里的指定分支拉取到本地（本地不存在的分支）
 > git pull origin master:wy
+
+## 删除远程分支
+> git push origin --delete <BranchName>
 
 # rebase
 

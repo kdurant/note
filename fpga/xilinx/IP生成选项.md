@@ -25,3 +25,11 @@
 
 ###
 对于vivado来说，只需要保留`ip_name.xci`即可，其他文件都可以根据`ip_name.xci`重新生成
+
+
+# 向工程中添加已经建立的IP
+1. 从其他工程中复制IP所在文件夹到本工程
+2. vivado中添加IP时选择`ip_name.xci`文件
+
+# ip_user_files目录
+第一次向工程添加IP时，会自动生成`ip_user_files`目录
