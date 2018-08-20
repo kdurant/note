@@ -56,3 +56,11 @@ begin
     //$fdisplay(...)
 end
 ```
+
+
+# Tips
+
+Q: 如何不修改HDL代码的情况下，改变参数以便更好的仿真
+A: 使用defparam
+`defparam path.reg = value;`
+

@@ -80,3 +80,8 @@ git push origin --tags
 
 ## 删除远程tag
 git push origin --delete tag v1.2.2
+
+# clone 
+
+## clone带有子模块的repo
+`git clone repo_addr --recursive`
