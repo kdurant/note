@@ -8,7 +8,11 @@
 在顶级项目的目录里添加子模块
 ```shell
 git submodule add module_addr
+cd submodule-project
+git submodule init
+git submodule update
 ```
+
 
 ## 更新子模块
 1. 进入子模块的目录，子模块和正常木块没有什么两样，按照正常操作即可
