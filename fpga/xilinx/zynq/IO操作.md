@@ -1,3 +1,17 @@
+# 分类
+* MIO
+    - 只对PS部分可见，PL不可用
+    - 分布在Bank0, Bank1
+    - 引脚固定
+    - 直接由PS操作
+* EMIO
+    - PS可用，但需要分配引脚。PL可用
+    - 分布在Bank2，Bank3
+    - 引脚由PL扩展，可直接由PS操作
+* AXI_GPIO
+    - PS通过M_AXI_GPIO接口控制PL非EMIO，使用时消耗管脚资源和逻辑资源
+  
+
 # step 
 在zynq配置界面中使能需要用到的IO口
 `MIO Configuration` -> `I/O Peripherals` -> `GPIO`
