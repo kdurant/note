@@ -15,8 +15,8 @@
 # step 
 在zynq配置界面中使能需要用到的IO口
 `MIO Configuration` -> `I/O Peripherals` -> `GPIO`
-# step
 
+# step
 * 声明2个变量
 ```c
 static XGpioPs psGpioInstancePtr;
