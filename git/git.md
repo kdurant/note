@@ -21,16 +21,18 @@ git submodule update
 # commit写法
 用于说明 commit 的类别，只允许使用下面7个标识。
 
-    init：项目初始化（用于项目初始化或其他某种行为的开始描述，不影响代码）
-    feat：新功能（feature）
-    fix：修补bug
-    docs：文档（documentation）
-    opt：优化和改善，比如弹窗进行确认提示等相关的，不会改动逻辑和具体功能等
-    style： 格式（不影响代码运行的变动）
-    refactor：重构（即不是新增功能，也不是修改bug的代码变动）
-    test：增加测试
+    init：(:tada:)项目初始化（用于项目初始化或其他某种行为的开始描述，不影响代码）
+    feat：(:sparkles:)新功能
+    fix：(:bug:)修补bug
+    docs：(:memo:)文档（documentation）
+    opt：(:zap:)优化和改善，比如弹窗进行确认提示等相关的，不会改动逻辑和具体功能等
+    style： (:art:)格式（不影响代码运行的变动）
+    refactor：(:recycle:)重构（即不是新增功能，也不是修改bug的代码变动）
+    test：(:white_check_mark:)增加测试
     save：单纯地保存记录
     other：用于难以分类的类别（不建议使用，但一些如删除不必要的文件，更新.ignore之类的可以使用）
+    bookmark: (:bookmark:) 发行/版本标签
+    linter: (:rotating_light:) 移除 linter 警告
 
 emoji                                   | emoji 代码                   | commit 说明
 :--------                               | :--------                    | :--------
@@ -52,6 +54,7 @@ emoji                                   | emoji 代码                   | commi
 :rocket: (火箭)                         | `:rocket:`                   | 部署功能
 :white_check_mark: (白色复选框)         | `:white_check_mark:`         | 增加测试
 :memo: (备忘录)                         | `:memo:`                     | 撰写文档
+:recycle:                              | `:recycle:`                  | 重构
 :hammer: (锤子)                         | `:hammer:`                   | 重大重构
 :art: (调色板)                          | `:art:`                      | 改进代码结构/代码格式
 :fire: (火焰)                           | `:fire:`                     | 移除代码或文件
@@ -64,7 +67,7 @@ emoji                                   | emoji 代码                   | commi
 :apple: (苹果)                          | `:apple:`                    | 修复 macOS 下的问题
 :penguin: (企鹅)                        | `:penguin:`                  | 修复 Linux 下的问题
 :checkered_flag: (旗帜)                 | `:checked_flag:`             | 修复 Windows 下的问题
-
+:see_no_evil:                           | `:see_no_evil:`              | 更改.gitignore文件
 
 # 远程仓库操作
 ## 修改远程仓库地址
