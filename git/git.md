@@ -10,7 +10,7 @@
 git submodule add module_addr
 cd submodule-project
 git submodule init
-git submodule update
+git submodule update 
 ```
 
 
