@@ -65,3 +65,14 @@ Q: 如何运行tcl文件？
 打开tcl窗口后，cd到工作目录，运行`source flow.tcl`
 
 `launch_sdk -workspace D:/tmp/dma_loop/dma_loop.sdk -hwspec D:/tmp/dma_loop/dma_loop.sdk/cpu_wrapper.hdf`
+
+
+# --------------------------
+## 创建工程
+create_project test -part xc7z020clg400-1
+
+## 创建IP
+create_ip -name fifo_generator -version 12.0 -vendor xilinx.com -library ip -module_name fifo_gen
+
+## 设置IP属性
+set_property CONFIG.Input_Data_Width 12 [get_ips fifo_gen]
