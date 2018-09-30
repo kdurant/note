@@ -2,7 +2,7 @@
 * ug835 ug835-vivado-tcl-commands
 * ug888 vivado-design-flows-overview-tutorial.
 * ug892 vivado-design-flows-overview
-* ug939 vivado-designing-with-ip-tutorial
+* ug941 vivado-designing-with-ip-tutorial
 
 # Non-project模式流程
 将下面所有步骤的内容放到一个文件
