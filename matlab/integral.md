@@ -5,7 +5,6 @@ $$\int_a^bf(x)dx = \lim_{\lambda \to 0}^nf(\xi_i)\Delta x_i$$
 
 ## 几何意义
 1. 被积函数在被积区域里与x轴围成的图形面积
-2. 弧长
 
 ## 曲线积分
 
@@ -59,8 +58,14 @@ y = \psi(t),
 $当参数t单调地有\alpha变到\beta时，点M(x,y)从L的起点A运动到终点B，若\varphi(t)与\psi(t)在以\alpha及\beta为端点的闭区间上具有一阶连续导数，且\varphi^{'2}(t) + \psi^{'2}(t) \neq 0，则曲线积分\int_LP(x, y)dx + Q(x, y)dy存在，且$
 $$\color{teal}\int_LP(x, y)dx + Q(x, y)dy \\ =\int_\alpha^\beta \{P[\varphi(t),\psi(t)]\varphi^{'}(t) + Q[\varphi(t),\psi(t)]\psi^{'}(t)\}dt$$
 
-
-2. 格林公式
+> $s：曲线；ds：曲线微元；\vec{T}：曲线s在ds处的单位切向量$
+> $W \,=  \int_{t=a}^{t=b}\vec{F} \cdot \vec{T}ds$
+> $\quad\;\; = \int_{t=a}^{t=b}\vec{F} \cdot d\vec{r}$
+> $\quad\;\; = $
+> $\quad\;\; = $
+> $\quad\;\; = $
+> $\quad\;\; = $
+1. 格林公式
 $$\mathop{\iint}\limits_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y} \right )dxdy=\oint _LPdx+Qdy$$
 
 ## 两类曲线积分联系
@@ -88,9 +93,9 @@ $$\mathop{\iiint}\limits_D f(x,y,z)d\sigma = \lim_{\lambda \to 0}\sum_{i=1}^n f(
 # 曲面积分
 ## 第一类曲面积分(对面积的曲面积分)
 ### <font color=red>定义</font>
-$设曲线\Sigma是光滑的，函数f(x,y,z)在\Sigma上有界。把\Sigma任意分成n小块\Delta S_i，设(\xi_i,  \eta_i, \zeta_i)是\Delta S_i上任取的一点，做乘积f(\xi_i,  \eta_i, \zeta_i)\Delta S_i (i=1,2,3...n)$ 
+$设曲线\Sigma是光滑的，函数f(x,y,z)在\Sigma上有界。把\Sigma任意分成n小块\Delta S_i，设(\xi_i,  \eta_i, \zeta_i)是\Delta S_i上任取的一点，做乘积f(\xi_i,  \eta_i, \zeta_i)\Delta S_i (i=1,2,3...n)，并作和\sum_{i=1}^n$
 $$\mathop{\iint}\limits_\Sigma f(x, y, z)dS = \lim_{\lambda \to 0}\sum_{i=1}^n f(\xi_i, \eta_i, \zeta_i)\Delta S_i$$
-
+$$\sum_{i=1}^n$
 ### 物理意义
 1. 密度分布不均匀的曲面要计算其质量
    $\Sigma$：积分区域，是三维曲面
