@@ -1,15 +1,16 @@
 # 一重积分
-## 意义
-1. 曲边梯形的面积
-   
-## 定义
+## <font color=red>定义</font>
 $$\int_a^bf(x)dx = \lim_{\lambda \to 0}^nf(\xi_i)\Delta x_i$$
 1. 积分区域
 
-## 曲线积分
-## 第一类曲线积分（对弧长的曲线积分）
+## 几何意义
+1. 被积函数在被积区域里与x轴围成的图形面积
+2. 弧长
 
-### 定义
+## 曲线积分
+
+## 第一类曲线积分（对弧长的曲线积分）
+### <font color=red>定义</font>
 $$\int_Lf(x, y)ds = \lim_{\lambda \to 0}\sum_{i=1}^n f(\xi_i, \eta_i)\Delta s_i$$
 
 ### 意义
@@ -19,17 +20,18 @@ $$\int_Lf(x, y)ds = \lim_{\lambda \to 0}\sum_{i=1}^n f(\xi_i, \eta_i)\Delta s_i$
     ds:弧长微元
 
 ### 计算方法
+* 转换为一重积分
 设f(x,y)在曲线弧L上有定义且连续，L的参数方程为
 $$\begin{cases}
-x = \phi(t), \\
+x = \varphi(t), \\
 y = \psi(t) \qquad ( \alpha \leq t \leq \beta)
 \end{cases}$$
-若$\phi(t)$、$\psi(t)$在$[\alpha, \beta]$上具有一阶连续导数，且$\phi^{'2}(t) + \psi^{'2}(t) \neq 0$，则曲线积分$f(x,y)ds$存在，且
+若$\varphi(t)$、$\psi(t)$在$[\alpha, \beta]$上具有一阶连续导数，且$\varphi^{'2}(t) + \psi^{'2}(t) \neq 0$，则曲线积分$f(x,y)ds$存在，且
 
-$$\color{teal}\int_Lf(x, y)ds = \int_\alpha^\beta f[\phi(t),\psi(t)]\sqrt{\phi^{'2}(t) + \psi^{'2}(t)}dt$$
+$$\color{teal}\int_Lf(x, y)ds = \int_\alpha^\beta f[\varphi(t),\psi(t)]\sqrt{\varphi^{'2}(t) + \psi^{'2}(t)}dt$$
 
 ## 第二类曲线积分（对坐标的曲线积分）
-###定义
+### <font color=red>定义</font>
 $$\int_LP(x, y)dx = \lim_{\lambda \to 0}^n\Sigma P(\xi_i, \eta_i)\Delta x_i$$, 
 $$\int_LQ(x, y)dy = \lim_{\lambda \to 0}^n\Sigma Q(\xi_i, \eta_i)\Delta y_i$$
 以上二个积分称为第二类曲线积分
@@ -47,16 +49,15 @@ $$\int_L\vec{F}(x,y)\cdot d\vec{r}$$
    $Q(x, y)dy$：变力在y轴的分量
 
 ### 计算方法
-1. 变成一重积分
+1. 转换为一重积分
 设f(x,y)在曲线弧L上有定义且连续，L的参数方程为
 $$\begin{cases}
-x = \phi(t), \\
+x = \varphi(t), \\
 y = \psi(t), 
 \end{cases}$$
 
-$当参数t单调地有\alpha变到\beta时，点M(x,y)从L的起点A运动到终点B，若\phi(t)与\psi(t)在以\alpha及\beta为端点的闭区间上具有一阶连续导数，且\phi^{'2}(t) + \psi^{'2}(t) \neq 0，则曲线积分\int_LP(x, y)dx + Q(x, y)dy存在，且$
-$$\int_LP(x, y)dx + Q(x, y)dy$$
-$$=\int_\alpha^\beta \{P[\phi(t),\psi(t)]\phi^{'}(t) + Q[\phi(t),\psi(t)]\psi^{'}(t)\}dt$$
+$当参数t单调地有\alpha变到\beta时，点M(x,y)从L的起点A运动到终点B，若\varphi(t)与\psi(t)在以\alpha及\beta为端点的闭区间上具有一阶连续导数，且\varphi^{'2}(t) + \psi^{'2}(t) \neq 0，则曲线积分\int_LP(x, y)dx + Q(x, y)dy存在，且$
+$$\color{teal}\int_LP(x, y)dx + Q(x, y)dy \\ =\int_\alpha^\beta \{P[\varphi(t),\psi(t)]\varphi^{'}(t) + Q[\varphi(t),\psi(t)]\psi^{'}(t)\}dt$$
 
 
 2. 格林公式
@@ -65,7 +66,7 @@ $$\mathop{\iint}\limits_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\
 ## 两类曲线积分联系
 
 # 二重积分
-## 定义
+## <font color=red>定义</font>
 $$\mathop{\iint}\limits_D f(x,y)d\sigma = \lim_{\lambda \to 0}\sum_{i=1}^n f(\xi_i, \eta_i)\Delta s_i$$
 
 ## 意义
@@ -77,23 +78,29 @@ $$\mathop{\iint}\limits_D f(x,y)d\sigma = \lim_{\lambda \to 0}\sum_{i=1}^n f(\xi
    D：平面薄片的面积
    $f(x,y)$:薄片的质量分布
 > 薄片必须是平面
+
+## 计算
    
 # 三重积分
-##定义
+## <font color=red>定义</font>
 $$\mathop{\iiint}\limits_D f(x,y,z)d\sigma = \lim_{\lambda \to 0}\sum_{i=1}^n f(\xi_i, \eta_i, \zeta_i)\Delta v_i$$
 
-
-# 第一类曲面积分(对面积的曲面积分)
-## 定义
+# 曲面积分
+## 第一类曲面积分(对面积的曲面积分)
+### <font color=red>定义</font>
+$设曲线\Sigma是光滑的，函数f(x,y,z)在\Sigma上有界。把\Sigma任意分成n小块\Delta S_i，设(\xi_i,  \eta_i, \zeta_i)是\Delta S_i上任取的一点，做乘积f(\xi_i,  \eta_i, \zeta_i)\Delta S_i (i=1,2,3...n)$ 
 $$\mathop{\iint}\limits_\Sigma f(x, y, z)dS = \lim_{\lambda \to 0}\sum_{i=1}^n f(\xi_i, \eta_i, \zeta_i)\Delta S_i$$
 
-## 物理意义
+### 物理意义
 1. 密度分布不均匀的曲面要计算其质量
    $\Sigma$：积分区域，是三维曲面
 
-# 第二类曲面积分(对坐标的曲面积分)
+### 计算方法
+将曲面积分化为二重积分
+$$\color{teal}\mathop{\iint}\limits_\Sigma f(x, y, z)dS = \mathop{\iint}\limits_{D_{xy}}f[x,y,z(x,y)]\sqrt{1+z_x^2(x,y) + z_y^2(x,y)}dxdy$$
 
-## 定义
+## 第二类曲面积分(对坐标的曲面积分)
+### <font color=red>定义</font>
 $$\mathop{\iint}\limits_\Sigma R(x, y, z)dxdy = \lim_{\lambda \to 0}\sum_{i=1}^n R(\xi_i, \eta_i, \zeta_i)(\Delta S_i)_{xy}$$
 $$\mathop{\iint}\limits_\Sigma P(x, y, z)dydz = \lim_{\lambda \to 0}\sum_{i=1}^n P(\xi_i, \eta_i, \zeta_i)(\Delta S_i)_{yz}$$
 $$\mathop{\iint}\limits_\Sigma Q(x, y, z)dzdx = \lim_{\lambda \to 0}\sum_{i=1}^n Q(\xi_i, \eta_i, \zeta_i)(\Delta S_i)_{zx}$$
@@ -101,3 +108,18 @@ $$\mathop{\iint}\limits_\Sigma Q(x, y, z)dzdx = \lim_{\lambda \to 0}\sum_{i=1}^n
 
 ## 物理意义
 1. 流速场通过曲面 S 的流量,也就是如何计算单位时间通过横断面流体的体
+
+
+# 麦克斯韦方程组
+1. 积分形式
+   $$\mathop{\oiint}\limits_\Sigma \mathbf{E} \cdot d\mathbf{s} = \tfrac{Q}{\epsilon_0}$$
+   $$\mathop{\oiint}\limits_\Sigma \mathbf{B} \cdot d\mathbf{s} = 0$$
+   $$\mathop{\oint}_L \mathbf{E} \cdot d\mathbf{l} = -\tfrac{d\Phi}{dt}$$
+   $$\mathop{\oint}_L \mathbf{H} \cdot d\mathbf{l} = I_f + \tfrac{d\Phi_B}{dt}$$
+
+
+2. 微分形式
+   $$\nabla \cdot \mathbf{E} = \tfrac{\rho}{\epsilon}$$
+   $$\nabla \cdot \mathbf{B} = 0$$
+   $$\nabla \times \mathbf{E} = -\tfrac{\partial\mathbf{B}}{\partial t}$$
+   $$\nabla \times \mathbf{H} = \mathbf{J}_f + \tfrac{\partial \mathbf{D}}{\partial t}$$
