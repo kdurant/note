@@ -3,10 +3,23 @@
 $$\int_a^bf(x)dx = \lim_{\lambda \to 0}^nf(\xi_i)\Delta x_i$$
 1. 积分区域
 
-## 几何意义
+### 几何意义
 1. 被积函数在被积区域里与x轴围成的图形面积
 
-## 曲线积分
+## 曲线弧长积分
+### 参数方程定义
+设曲线弧由参数方程
+$$\begin{cases}
+x = \varphi(t), \\
+y = \psi(t) \qquad ( \alpha \leq t \leq \beta)
+\end{cases}$$
+给出，其中$\varphi(t)$、$\psi(t)$在$[\alpha, \beta]$上具有连续导数，且$\varphi(t) + \psi(t) $不同时为零，则弧长
+$$\color{teal}s = \int_a^b\sqrt{\varphi^{'2}(t) + \psi^{'2}(t)}dt$$
+
+### 向量值函数定义
+当t从t=a增加到t=b时，恰好描绘一次的光滑曲线$\vec{t}=f(t)\vec{i}+g(t)\vec{j}+h(t)\vec{k}的长度是$
+$$\color{teal}s = \sqrt{(\tfrac{df}{dt})^2 + (\tfrac{dg}{dt})^2 + (\tfrac{dh}{dt})^2}dt$$
+
 
 ## 第一类曲线积分（对弧长的曲线积分）
 ### <font color=red>定义</font>
@@ -31,7 +44,7 @@ $$\color{teal}\int_Lf(x, y)ds = \int_\alpha^\beta f[\varphi(t),\psi(t)]\sqrt{\va
 
 ## 第二类曲线积分（对坐标的曲线积分）
 ### <font color=red>定义</font>
-$$\int_LP(x, y)dx = \lim_{\lambda \to 0}^n\Sigma P(\xi_i, \eta_i)\Delta x_i$$, 
+$$\int_LP(x, y)dx = \lim_{\lambda \to 0}^n\Sigma P(\xi_i, \eta_i)\Delta x_i,$$ 
 $$\int_LQ(x, y)dy = \lim_{\lambda \to 0}^n\Sigma Q(\xi_i, \eta_i)\Delta y_i$$
 以上二个积分称为第二类曲线积分
 记做：
@@ -58,13 +71,7 @@ y = \psi(t),
 $当参数t单调地有\alpha变到\beta时，点M(x,y)从L的起点A运动到终点B，若\varphi(t)与\psi(t)在以\alpha及\beta为端点的闭区间上具有一阶连续导数，且\varphi^{'2}(t) + \psi^{'2}(t) \neq 0，则曲线积分\int_LP(x, y)dx + Q(x, y)dy存在，且$
 $$\color{teal}\int_LP(x, y)dx + Q(x, y)dy \\ =\int_\alpha^\beta \{P[\varphi(t),\psi(t)]\varphi^{'}(t) + Q[\varphi(t),\psi(t)]\psi^{'}(t)\}dt$$
 
-> $s：曲线；ds：曲线微元；\vec{T}：曲线s在ds处的单位切向量$
-> $W \,=  \int_{t=a}^{t=b}\vec{F} \cdot \vec{T}ds$
-> $\quad\;\; = \int_{t=a}^{t=b}\vec{F} \cdot d\vec{r}$
-> $\quad\;\; = $
-> $\quad\;\; = $
-> $\quad\;\; = $
-> $\quad\;\; = $
+
 1. 格林公式
 $$\mathop{\iint}\limits_D\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y} \right )dxdy=\oint _LPdx+Qdy$$
 
@@ -95,7 +102,7 @@ $$\mathop{\iiint}\limits_D f(x,y,z)d\sigma = \lim_{\lambda \to 0}\sum_{i=1}^n f(
 ### <font color=red>定义</font>
 $设曲线\Sigma是光滑的，函数f(x,y,z)在\Sigma上有界。把\Sigma任意分成n小块\Delta S_i，设(\xi_i,  \eta_i, \zeta_i)是\Delta S_i上任取的一点，做乘积f(\xi_i,  \eta_i, \zeta_i)\Delta S_i (i=1,2,3...n)，并作和\sum_{i=1}^n$
 $$\mathop{\iint}\limits_\Sigma f(x, y, z)dS = \lim_{\lambda \to 0}\sum_{i=1}^n f(\xi_i, \eta_i, \zeta_i)\Delta S_i$$
-$$\sum_{i=1}^n$
+
 ### 物理意义
 1. 密度分布不均匀的曲面要计算其质量
    $\Sigma$：积分区域，是三维曲面
