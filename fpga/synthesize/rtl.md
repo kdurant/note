@@ -137,6 +137,31 @@ endmodule
 
 ### 条件不完备
 #### 代码
+```verilog
+module test
+(
+    input   wire                a,
+    input   wire                b,
+    input   wire                c,
+
+    input   wire                t1,
+    input   wire                t2,
+    input   wire                t3,
+
+    output  reg                 led
+);
+
+always @(*)
+begin
+    if(t1)
+        led <= a;
+    else if(t2)
+        led <= b;
+    else if(t3)
+        led <= c;
+end
+endmodule
+```
 #### RTL视图
 ![1-7](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-7.png?raw=true)
 
