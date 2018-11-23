@@ -78,16 +78,16 @@ endmodule
 ```verilog
 module test
 (
-    input   wire                a,
-    input   wire                b,
-    input   wire                e,
+    input   wire [03:00]        a,
+    input   wire [03:00]        b,
+    input   wire [03:00]        c,
 
-    output  reg                 led
+    output  reg  [03:00]        led
 );
 
 always @(*)
 begin
-    if(e)
+    if(c)
         led <= a;
     else
         led <= b;
@@ -95,6 +95,8 @@ end
 endmodule
 ```
 #### RTL视图
+1. `if`里的条件综合成简单逻辑电路
+2. Mux的位宽和输入数据宽度一致
 ![1-5](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-5.png?raw=true)
 
 ## if-elseif-else组合逻辑电路
@@ -133,6 +135,7 @@ end
 endmodule
 ```
 #### RTL视图
+1. 选择器的级数和`else( if)`的个数相等
 ![1-6](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-6.png?raw=true)
 
 ### 条件不完备
@@ -163,13 +166,43 @@ end
 endmodule
 ```
 #### RTL视图
+1. 选择器的级数和`else if`的个数相等
 ![1-7](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-7.png?raw=true)
 
 ## case组合逻辑电路
 ### 条件完备
 条件有两种情况：
-* 列出了所有可能的case
-* 没有列出所有可能的case，但有default
+1. 列出了所有可能的case
+#### 代码
+```verilog
+module test
+(
+    input   wire [02:00]        a,
+    input   wire [02:00]        b,
+    input   wire [02:00]        c,
+    input   wire [02:00]        d,
+
+    input   wire                t1,
+    input   wire                t2,
+
+    output  reg  [02:00]        led
+);
+
+always @(*)
+begin
+    case ({t2, t1})
+        2'b00: led <= a;
+        2'b01: led <= b;
+        2'b10: led <= c;
+        2'b11: led <= d;
+    endcase
+end
+endmodule
+```
+#### RTL视图
+![1-9]()
+
+2. 没有列出所有可能的case，但有default
 #### 代码
 ```verilog
 module test
@@ -202,6 +235,10 @@ endmodule
 ### 条件不完备
 #### 代码
 #### RTL视图
+
+1. 使用Mux的个数和选择数据的宽度有关
+2. 条件会连接到每个Mux的选择端口
+3. 数据会连接到每个Mux的数据端口(实际逻辑决定？)
 
 # 时序逻辑电路
 根据设计风格要求，每个`always @ (posedge clk)`语句块只描述一个信号
