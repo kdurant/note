@@ -1,6 +1,11 @@
 # 代码与电路结构
 ## 简单组合逻辑电路
-由简单的`and, or, nor, add, sub`组成的电路
+> 组合逻辑电路是指在任何时刻，输出状态只决定于同一时刻各输入状态的组合，而与电路以前状态、其他时间的状态无关
+
+* Altera RTL视图中电路符号说明
+  Analyzing Designs with Quartus II Netlist Viewers -> Schematic View -> Schematic Symbols
+ 
+* Xilinx RTL视图中电路符号说明
 ### 代码
 ```verilog
 module test
@@ -69,9 +74,9 @@ module test
 always @(*)
 begin
     if(c)
-        led <= a;
+        led = a;
     else
-        led <= b;
+        led = b;
 end
 endmodule
 ```
@@ -96,7 +101,7 @@ module test
 always @(*)
 begin
     if(e)
-        led <= a;
+        led = a;
 end
 endmodule
 ```
@@ -123,15 +128,15 @@ module test
 always @(*)
 begin
     if(sel[0])
-        led <= a;
+        led = a;
     else if(sel[1])
-        led <= b;
+        led = b;
     else if(sel[2])
-        led <= c;
+        led = c;
     else if(sel[3])
-        led <= d;
+        led = d;
     else
-        led <= e;
+        led = e;
 end
 endmodule
 ```
@@ -158,13 +163,13 @@ module test
 always @(*)
 begin
     if(sel[0])
-        led <= a;
+        led = a;
     else if(sel[1])
-        led <= b;
+        led = b;
     else if(sel[2])
-        led <= c;
+        led = c;
     else if(sel[3])
-        led <= d;
+        led = d;
 end
 endmodule
 ```
@@ -271,7 +276,31 @@ endmodule
 3. 数据会连接到每个Mux的数据端口(实际逻辑决定？)
 
 ## 时序逻辑电路
-时序逻辑电路 = 组合逻辑电路 + 寄存器，所以对于条件完备的时序电路，其RTL结构相当于组合逻辑电路的后面跟了一级寄存器。
+时序逻辑电路 = 组合逻辑电路 + 寄存器
+
+1. 条件不完备的组合电路会产生锁存器，对应的时序电路RTL就是将锁存器换成寄存器，例如将下面代码及其RTL结构和`1.3.2`比较即可
+```verilog
+module test
+(
+    input   wire                clk,
+    input   wire [03:00]        a,
+    input   wire [03:00]        e,
+
+    output  reg  [03:00]        led
+);
+
+always @(posedge clk)
+begin
+    if(e)
+        led <= a;
+end
+endmodule
+```
+
+![2-1a](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/2-1a.png?raw=true)
+![2-1b](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/2-1b.png?raw=true)
+
+2. 对于条件完备的时序电路其RTL结构和组合电路相比，只是在输出端添加了一级寄存器
 
 # 关键路径延迟优化方法
 关键路径是指系统中两个寄存器之间组合逻辑延迟最大的路径，它有着决定系统Fmax的能力。所谓关键路径优化，就是要想办法减少组合逻辑的延迟。
