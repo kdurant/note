@@ -1,12 +1,12 @@
-# 代码与电路结构
-## 简单组合逻辑电路
+# 1. 代码与电路结构
+## 1.1. 简单组合逻辑电路
 > 组合逻辑电路是指在任何时刻，输出状态只决定于同一时刻各输入状态的组合，而与电路以前状态、其他时间的状态无关
 
 * Altera RTL视图中电路符号说明
   Analyzing Designs with Quartus II Netlist Viewers -> Schematic View -> Schematic Symbols
  
 * Xilinx RTL视图中电路符号说明
-### 代码
+### 1.1.1. 代码
 ```verilog
 module test
 (
@@ -22,21 +22,21 @@ module test
 assign                      led = ~(a + b - c & d | e);
 endmodule
 ```
-### RTL视图
+### 1.1.2. RTL视图
 ![1-1a](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-1a.png?raw=true)
 ![1-1b](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-1b.png?raw=true)
 
-### 总结
+### 1.1.3. 总结
 1.	没有括号改变优先级的逻辑操作，是延迟连很长的组合逻辑电路，会影响时序性能
 2.	程序语句中最先面的输入，数据路径最长；最后面的输入，数据路径最短
 3.	程序语句从左到右，每两个输入公用一个组合逻辑节点
 4.	如果有大于等于4个输入进行逻辑操作，使用括号可以减少关键路径的节点
 
-## 组合逻辑环
+## 1.2. 组合逻辑环
 1. 必须是组合逻辑
 2. 必须是环路（等号左边的值出现在了等号右边）。
 必须同时满足上面两个条件才可能出现组合逻辑环，在时序电路里永远不可能出现这种电路的
-### 代码
+### 1.2.1. 代码
 ```verilog
 module test
 (
@@ -48,7 +48,7 @@ module test
 assign                  c  = a & b & c;
 endmodule
 ```
-### RTL视图
+### 1.2.2. RTL视图
 ![1-3a](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-3a.png?raw=true)
 
 ![1-3b](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-3b.png?raw=true)
@@ -57,10 +57,10 @@ quartus编译后出现了如下提示，vivado没有发现类似提示
 > Warning (10755): Verilog HDL warning at test.v(8): assignments to c create a combinational loop
 
 
-## if-else组合逻辑电路
+## 1.3. if-else组合逻辑电路
 当条件不完备的时候，无论是`if`还是`case`语句，都会生成锁存器，在设计中应该尽量避免
-### 条件完备
-#### 代码
+### 1.3.1. 条件完备
+#### 1.3.1.1. 代码
 ```verilog
 module test
 (
@@ -80,15 +80,15 @@ begin
 end
 endmodule
 ```
-#### RTL视图
+#### 1.3.1.2. RTL视图
 1. `if`里的条件 <font color=red size=5>对应</font> 简单逻辑电路
 2. `if-else`语句 <font color=red size=5>对应</font> Mux
 3. Mux的个数和输入数据宽度一致
 ![1-4a](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-4a.png?raw=true)
 
 ![1-4b](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-4b.png?raw=true)
-### 条件不完备
-#### 代码
+### 1.3.2. 条件不完备
+#### 1.3.2.1. 代码
 ```verilog
 module test
 (
@@ -105,13 +105,13 @@ begin
 end
 endmodule
 ```
-#### RTL视图
+#### 1.3.2.2. RTL视图
 ![1-5a](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-5a.png?raw=true)
 ![1-5b](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-5b.png?raw=true)
 
-## if-elseif-else组合逻辑电路
-### 条件完备
-#### 代码
+## 1.4. if-elseif-else组合逻辑电路
+### 1.4.1. 条件完备
+#### 1.4.1.1. 代码
 ```verilog
 module test
 (
@@ -140,14 +140,14 @@ begin
 end
 endmodule
 ```
-#### RTL视图
+#### 1.4.1.2. RTL视图
 1. 选择器的级数和`else( if)`的个数相等
 2. 最早出现条件的路径延时最少
 ![1-6a](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-6a.png?raw=true)
 ![1-6b](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-6b.png?raw=true)
 
-### 条件不完备
-#### 代码
+### 1.4.2. 条件不完备
+#### 1.4.2.1. 代码
 ```verilog
 module test
 (
@@ -173,16 +173,16 @@ begin
 end
 endmodule
 ```
-#### RTL视图
+#### 1.4.2.2. RTL视图
 1. 选择器的级数和`else if`的个数相等
 ![1-7a](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-7a.png?raw=true)
 ![1-7b](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-7b.png?raw=true)
 
-## case组合逻辑电路
-### 条件完备
+## 1.5. case组合逻辑电路
+### 1.5.1. 条件完备
 条件有两种情况：
 1. 列出了所有可能的case
-#### 代码
+#### 1.5.1.1. 代码
 ```verilog
 module test
 (
@@ -208,11 +208,11 @@ begin
 end
 endmodule
 ```
-#### RTL视图
+#### 1.5.1.2. RTL视图
 ![1-8-1b](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-8-1b.png?raw=true)
 
 2. 没有列出所有可能的case，但有default
-#### 代码
+#### 1.5.1.3. 代码
 ```verilog
 module test
 (
@@ -239,11 +239,11 @@ begin
 end
 endmodule
 ```
-#### RTL视图
+#### 1.5.1.4. RTL视图
 ![1-8-2b](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-8-2b.png?raw=true)
 
-### 条件不完备
-#### 代码
+### 1.5.2. 条件不完备
+#### 1.5.2.1. 代码
 ```verilog
 module test
 (
@@ -268,14 +268,14 @@ begin
 end
 endmodule
 ```
-#### RTL视图
+#### 1.5.2.2. RTL视图
 ![1-9b](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/1-9b.png?raw=true)
 
 1. 使用Mux的个数和选择数据的宽度有关
 2. 条件会连接到每个Mux的选择端口
 3. 数据会连接到每个Mux的数据端口(实际逻辑决定？)
 
-## 时序逻辑电路
+## 1.6. 时序逻辑电路
 时序逻辑电路 = 组合逻辑电路 + 寄存器
 
 1. 条件不完备的组合电路会产生锁存器，对应的时序电路RTL就是将锁存器换成寄存器，例如将下面代码及其RTL结构和`1.3.2`比较即可
@@ -302,7 +302,7 @@ endmodule
 
 2. 对于条件完备的时序电路其RTL结构和组合电路相比，只是在输出端添加了一级寄存器
 
-# 关键路径延迟优化方法
+# 2. 关键路径延迟优化方法
 关键路径是指系统中两个寄存器之间组合逻辑延迟最大的路径，它有着决定系统Fmax的能力。所谓关键路径优化，就是要想办法减少组合逻辑的延迟。
 
-# 资源重用方法
+# 3. 资源重用方法
