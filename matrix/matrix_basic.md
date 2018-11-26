@@ -20,7 +20,7 @@ m = np.mat(np.identity(3))
 ```
 
 # 对角矩阵
-不再对叫上的元素都是0，称为对焦矩阵
+不在对叫上的元素都是0，称为对焦矩阵
 ```python
 m = np.mat(np.diag([1,2,3]))        
 ```
@@ -81,14 +81,26 @@ np.linalg.matrix_rank(m)
 ```
 
 # 方阵的特征值和特征向量
+$设\mathbf{A}是n阶矩阵，如果数\lambda和n维非零列向量\mathbf{x}使关系式$
+$$\mathbf{A}\mathbf{x} = \lambda\mathbf{x}$$
+$成立，那么，这样的数\lambda称为矩阵\mathbf{A}的特征值，非零向量\mathbf{x}称为\mathbf{A}对应于特征值\lambda的特征向量$
 ```python
 a,b = np.linalg.eig(m)  # 特征值保存在a中，特征向量保存在b中
 ```
 
 # 线性代数名词
 ## 初等变换
+1. 对调两行
+2. 以数$k != 0$乘某一行中的所有元素
+3. 把某一行所有元素的k倍加到另一行对应的元素
+
 ## 初等矩阵
+由单位阵E经过一次初等变换得到的矩阵称为初等矩阵
+
 ## 相似矩阵
+$设\mathbf{A}, \mathbf{B}都是n阶矩阵，若有可逆矩阵\mathbf{P}, 使$
+$$\mathbf{P}^{-1}\mathbf{A}\mathbf{P} = \mathbf{B}，$$
+$则称\mathbf{B}是\mathbf{A}的相似矩阵，或者说\mathbf{A}与\mathbf{B}相似$
 
 ## 迹
 一个 的矩阵 的迹（或迹数），是指 的主对角线（从左上方至右下方的对角线）上各个元素的总和
@@ -128,6 +140,7 @@ $给定向量组A：\mathbf{a_1},\mathbf{a_2}, ... , \mathbf{a_n}, 如果存在�
 $$k_1\mathbf{a_1} + k_2\mathbf{a_2} + ... + k_n\mathbf{a_n} = 0$$
 $则称向量组A使线性相关的，否则称为线性无关$
 
+## 正定矩阵
 
 # array 和 matrix区别
 1. 转置不同
