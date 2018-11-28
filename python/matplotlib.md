@@ -1,131 +1,4 @@
-# 基本绘图
-只设置x，y的数据
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-x = np.linspace(0, 10, 1000)
-y = np.sin(x)
-z = np.cos(x)
-
-fig = plt.figure()
-#按照[left,bottom,width,height]新建一个axes到figure
-ax = fig.add_axes([0.1, 0.1, 0.8, 0.8])
-ax.plot(x, y, 'r', label = 'sin')
-plt.legend() # 显示plot函数里的label标签
-
-plt.show()
-```
-
-## [figure函数](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.figure.html#matplotlib.pyplot.figure)
-## [plot函数](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot)
-
-格式  | 意义       
-:----| :--------             
-'-'  | 实线
-'--' |   虚线
-'-.' |   点与线
-':'  |   点
-'.'  |   点标记
-','  |  像素标记
-'o'  |  圆圈标记
-'v'  |  倒三角标记
-'^'  |  正三角标记
-'<'  |  左三角标记
-'>'  |  右三角标记
-'1'  |   向下Y标记
-'2'  |  向上Y标记
-'3'  |  向左Y标记
-'4'  |  向右Y标记
-'s'  |  正方形标记
-'p'  |  五角星标记
-'*'  |   *标记
-'h'  |  六边形1 标记
-'H'  |  六边形2 标记
-'+'  |  +标记
-'x'  |  x标记
-'D'  |  钻石标记
-'d'  |  薄砖石标记
-'|'  |  垂直线标记
-'_'  |  水平线标记
-
-## [subplot函数](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.subplot.html#matplotlib.pyplot.subplot)
-
-## 栅格控制
-1. 设置栅格线的形状
-```python
-ax.grid(True, linestyle='-.')
-```
-[grid详细属性](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.grid.html#matplotlib.pyplot.grid)
-
-## 坐标轴标签
-```python
-ax.set_xlabel('x')
-ax.set_ylabel('sinx')
-```
-
-## 坐标设置
-```python
-ax.tick_params(labelcolor='r', labelsize='medium', width=3)
-```
-ax.set_title('sinx function')
-
-[plt.gca()](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.gca.html#matplotlib.pyplot.gca)
-
-## 图片标题
-```python
-fig = plt.suptitle('title')
-plt.title('title')
-```
-
-# 子图
-```python
-import matplotlib.pyplot as plt
-import numpy as np
-
-x = np.linspace(0, 10, 1000)
-y = np.sin(x)
-z = np.cos(x)
-
-fig, ax = plt.subplots(2, 1, constrained_layout=True)
-ax[0].plot(x, y, label='sin')
-ax[0].set_title('subplot 1')
-ax[0].set_xlabel('t')
-ax[0].set_ylabel('sin(t)')
-plt.legend() # 显示plot函数里的label标签
-
-
-ax[1].plot(x, z, label='cos')
-ax[1].set_title('subplot 1')
-ax[1].set_xlabel('t')
-ax[1].set_ylabel('cos(t)')
-plt.legend() # 显示plot函数里的label标签
-
-plt.show()
-```
-# 根据Y轴数据的范围设置显示颜色
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-t = np.arange(0.0, 2.0, 0.01)
-s = np.sin(2 * np.pi * t)
-
-upper = 0.77
-lower = -0.77
-
-supper = np.ma.masked_where(s < upper, s)
-slower = np.ma.masked_where(s > lower, s)
-smiddle = np.ma.masked_where(np.logical_or(s < lower, s > upper), s)
-
-fig, ax = plt.subplots()
-ax.plot(t, smiddle, t, slower, t, supper)
-plt.show()
-```
-
-# 绘制X
-
-
+记录一些matplotlib中发现的好用的例子，想用的时候找不到，太痛苦了。
 
 # 绘制三维图
 ```python
@@ -204,5 +77,80 @@ y = np.cos(theta)
 ax.plot(x, y, z, label='parametric curve')
 ax.legend()
 
+plt.show()
+```
+
+# Cursor Demo
+一个自动捕获附近位置点的光标
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+class Cursor(object):
+    def __init__(self, ax):
+        self.ax = ax
+        self.lx = ax.axhline(color='k')  # the horiz line
+        self.ly = ax.axvline(color='k')  # the vert line
+
+        # text location in axes coords
+        self.txt = ax.text(0.7, 0.9, '', transform=ax.transAxes)
+
+    def mouse_move(self, event):
+        if not event.inaxes:
+            return
+
+        x, y = event.xdata, event.ydata
+        # update the line positions
+        self.lx.set_ydata(y)
+        self.ly.set_xdata(x)
+
+        self.txt.set_text('x=%1.2f, y=%1.2f' % (x, y))
+        plt.draw()
+
+
+class SnaptoCursor(object):
+    """
+    Like Cursor but the crosshair snaps to the nearest x,y point
+    For simplicity, I'm assuming x is sorted
+    """
+
+    def __init__(self, ax, x, y):
+        self.ax = ax
+        self.lx = ax.axhline(color='k')  # the horiz line
+        self.ly = ax.axvline(color='k')  # the vert line
+        self.x = x
+        self.y = y
+        # text location in axes coords
+        self.txt = ax.text(0.7, 0.9, '', transform=ax.transAxes)
+
+    def mouse_move(self, event):
+
+        if not event.inaxes:
+            return
+
+        x, y = event.xdata, event.ydata
+
+        indx = min(np.searchsorted(self.x, [x])[0], len(self.x) - 1)
+        x = self.x[indx]
+        y = self.y[indx]
+        # update the line positions
+        self.lx.set_ydata(y)
+        self.ly.set_xdata(x)
+
+        self.txt.set_text('x=%1.2f, y=%1.2f' % (x, y))
+        print('x=%1.2f, y=%1.2f' % (x, y))
+        plt.draw()
+
+t = np.arange(0.0, 1.0, 0.01)
+s = np.sin(2 * 2 * np.pi * t)
+fig, ax = plt.subplots()
+
+# cursor = Cursor(ax)
+cursor = SnaptoCursor(ax, t, s)
+plt.connect('motion_notify_event', cursor.mouse_move)
+
+ax.plot(t, s, 'o')
+plt.axis([0, 1, -1, 1])
 plt.show()
 ```
