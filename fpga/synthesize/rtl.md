@@ -606,3 +606,8 @@ endmodule
 * ns没有体现在RTL视图里
 * 每个状态转移的条件都会综合出一个1bit的Mux, 然后作为cs对应寄存器的输入
 * 时序逻辑的输出RTL结构由第三段状态决定
+
+![6-1b](https://github.com/kdurant/note/blob/master/fpga/synthesize/img/6-1b.png?raw=true)
+* 粉红色部分为时序输出部分RTL结构。
+* 橙色部分为状态转移
+* 余下的组合逻辑为状态跳转
