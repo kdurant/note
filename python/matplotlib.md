@@ -1,4 +1,10 @@
 记录一些matplotlib中发现的好用的例子，想用的时候找不到，太痛苦了。
+# 子图示例
+```python
+import matplotlib.pyplot as plt
+fig, ax = plt.subplots(3, sharex=True)
+ax[0].plot(x, y, 'go-')
+```
 
 # 绘制三维图
 ```python
