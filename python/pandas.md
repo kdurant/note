@@ -2,8 +2,18 @@
 ss1 = pd.Series([1, 2, 'a3', 4.0, True, '2018-12-21'])
 ```
 # 更改元素数据类型
+TODO
 
-# 删除DataFrame的某一行或某一列
+# 遍历行列
+```python
+for col in df.columns:
+    print(df[col])
+
+for row in df.index:
+    print(df.loc[row])
+```
+
+# 删除行或列
 ```python
 df = pd.DataFrame(np.arange(24).reshape(6,4), columns=['A', 'B', 'C', 'D'])
 ```

@@ -1,5 +1,13 @@
 # 一重积分
 ## <font color=red>定义</font>
+$设函数f(x)在[a, b]上有界，在[a,b]中任意插入若干个分点$
+$$a = x_0 < x_1 < x_2<...< x_{n-1} < x_n = b$$
+$把去间[a, b]分成n个小区间$
+$$ [x_0, x_1],[x_1, x_2],...,[x_{n-1},x_n], $$
+$各个小区间的长度依次为$
+$$ \Delta x_1 = x_1-x_0, \Delta x_2 = x_2-x_1,..., \Delta x_n = x_n - x_{n-1}, $$
+$在每个小去间[x_{i-1}, x_i]上任取一点\xi_i(x_{i-1} \leq \xi_i \leq x_i)，做函数值f(\xi_i)与小区间长度\Delta x_i的乘积f(\xi_i)\Delta x_i (i=1, 2, ... , n)，并作出和$
+
 $$\int_a^bf(x)dx = \lim_{\lambda \to 0}^nf(\xi_i)\Delta x_i$$
 1. 积分区域
 
