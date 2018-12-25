@@ -29,6 +29,20 @@ df = pd.DataFrame(np.arange(24).reshape(6,4), columns=['A', 'B', 'C', 'D'])
 4. 删除列时，指定列序号
 `df.drop(df.columns[1], axis=1)`
 
+5. 删除列中包含某些字符的列
+```python
+df = pd.DataFrame(np.arange(16).reshape(4,4), columns=['A11', 'B11', 'C', 'D'])
+for x in df.columns:
+    if "11" in x:
+        df.drop(x, axis=1, inplace=True)
+
+[df.drop(x, axis=1, inplace=True) for x in df.columns.tolist() if "11" in x]
+
+df[list(filter(lambda x: "11" not in x,df.columns.tolist()))]
+
+df[df.columns[~df.columns.str.contains('11')]]
+```
+
 # 过滤数据
 1. 根据单列值选择DataFrame数据
 ```python
