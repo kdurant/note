@@ -1,6 +1,8 @@
 # vsim
- - nowarn, 关键编译时的一些警告信息
+ - nowarn, 关闭编译时的一些警告信息
     +nowarnTFMPC   +nowarn3017
+ - voptargs， 优化仿真，可以减少仿真时间
+  `vsim -t ps -voptargs="+acc" -L $env(ALTERA_LIB) work.top_tb`
 
 # vopt
 ## acc
