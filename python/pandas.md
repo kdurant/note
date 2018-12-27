@@ -3,6 +3,10 @@ ss1 = pd.Series([1, 2, 'a3', 4.0, True, '2018-12-21'])
 ```
 # 更改元素数据类型
 TODO
+1. 将字符串转换为数字, 不能转换的元素的设置为np.nan
+```python
+pd.to_numeric(df['col'], errors='coerce', downcast='unsigned')
+```
 
 # 遍历行列
 ```python
@@ -47,7 +51,7 @@ df[df.columns[~df.columns.str.contains('11')]]
 1. 根据单列值选择DataFrame数据
 ```python
 df[df.A > 10]
-`df[df.A != 'X']    # A列中是'X'的行不会被选择
+df[df.A != 'X']    # A列中是'X'的行不会被选择
 ```
 
 2. 根据类型选择Series数据
