@@ -18,8 +18,8 @@ bool EnQueue(LinkQueue *Q, QElemType e)
         return false;
     s->data = e;
     s->next = NULL;
-    Q->rear->next = s;  /* 把拥有元素e的新结点s赋值给原队尾结点的后继*/
-    Q->rear = s;       /* 把当前的s设置为队尾结点，rear指向s*/
+    Q->rear->next = s;  // 把拥有元素e的新结点s赋值给原队尾结点的后继
+    Q->rear = s;        // 把当前的s设置为队尾结点，rear指向s
     return true;
 }
 

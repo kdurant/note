@@ -15,7 +15,7 @@ typedef struct QNode
 {
     QElemType data;
     struct QNode *next;
-}QNode, *QueuePtr;
+}QNode, * QueuePtr;
 
 typedef struct          /* 队列的链表结构 */
 {
