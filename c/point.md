@@ -65,8 +65,31 @@ printf("%c\n", *buf++);     // 不正确
 ```
 # 二级指针
 ```c
-int * *p; // *p 取 p地址里的数据，前面的int * 表示取到的数据依然是一个地址，还要从这个地址里再使用一次解引用，才能获得真正的数据
-char * *s;  // s是一个指向字符变量指针的指针
+
+
+int var;
+int *p1 = &var;    // *p1 的值是 var的内容
+int ** p2 = &p1;   // *p2 的值是 p1的地址, 所以 **p2的值是var的内容
+
+typedef struct Node
+{
+    int data;
+    struct Node* next;
+}Node;
+
+typedef struct Node* LinkList;
+
+Node var;       // struct Node var
+
+// LinkList test = &var;
+// test里存放的是Node类型的地址, 修改test的内容,即可修改test指向的结点
+// (*test)才是
+LinkList test;  //struct Node* test
+
+// LinkList *l = &test;
+// l里存放的是test(指针)变量的地址
+// *l取出test(指针)变量保存的内容, var变量的地址 
+LinkList *l;    // struct Node* * l; 
 ```
 
 
