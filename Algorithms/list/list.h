@@ -39,7 +39,7 @@ extern LinkList test;
 bool list_init(LinkList* l);
 
 /**
- * @brief 在当前链表后追加新的结点
+ * @brief 在当前链表的末尾追加新的结点
  * 
  * @param l 
  * @param node 
@@ -47,6 +47,17 @@ bool list_init(LinkList* l);
  * @return false 
  */
 bool list_append(LinkList* l, ElemType node);
+
+/**
+ * @brief 在链表的第pos个结点后插入新的结点
+ * 
+ * @param l 
+ * @param pos 
+ * @param node 
+ * @return true 
+ * @return false 
+ */
+bool list_insert(LinkList* l, int pos, ElemType node);
 
 /**
  * @brief 输出链表中每个结点的数据
@@ -59,7 +70,7 @@ void list_print(LinkList l);
  * @brief 
  * 
  * @param l 
- * @return int 列表已有结点个数
+ * @return int 列表已有结点个数(包含头指针)
  */
 int list_length(LinkList l);
 

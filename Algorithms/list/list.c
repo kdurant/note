@@ -2,6 +2,11 @@
 
 LinkList test;
 
+static void copy_node(LinkList* l, ElemType node)
+{
+    (*l)->data = node;
+}
+
 bool list_init(LinkList* l)
 {
 #ifdef TEST
@@ -49,6 +54,25 @@ bool list_append(LinkList* l, ElemType node)
 
     return true;
 }
+
+// TODO 异常处理
+bool list_insert(LinkList* l, int pos, ElemType node)
+{
+    LinkList head = *l;
+    LinkList new = (LinkList)malloc(sizeof(Node));
+    copy_node(&new, node);
+
+    while(pos > 0)
+    {
+        head = head->next;
+        pos--;
+    }
+    // 插入结点
+    new->next = head->next;
+    head->next = new;
+    return true;
+}
+
 
 void list_print(LinkList l)
 {
