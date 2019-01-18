@@ -25,3 +25,9 @@ int *dat = (int *)buf;
 
 # quartus编译
 quartus编译nios核时只需要在工程里添加一个qsys文件即可
+
+# nios程序固化
+1. 在qsys中添加flash控制器
+2. nios cpu中将reset vector选择为flash.(将reset vector设置为ram后即可进行debug)
+3. quartus里将flash使用到的几个多功能引脚设置为普通IO, 并分配引脚
+4. nios里选择`Flash Program`, 选择sof和elf进行下载
