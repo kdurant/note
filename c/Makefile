@@ -1,27 +1,36 @@
 # CC = gcc -std=c99
-CC = gcc -std=c99 -g
+CC = gcc
 
-CFLGAS  = -std=c99
+CFLGAS += -std=c99
 CFLAGS += -D TEST
 CFLAGS += -g
 
+OBJ_PATH = .
+BIN_PATH = .
+SRC_PATH = .
+
 IDIR = ./head
-INC = -I$(IDIR)
+INC += -I$(IDIR)
 
-TARGET = main 
+TARGET = $(BIN_PATH)/main 
+# ifeq ($(OS),Windows_NT)
+# 	TARGET_NAME := $(addsuffix .exe,$(TARGET_NAME))
+# endif
 
-obj = main.o list.o
+C_SRCS += ./main.c
+C_SRCS += ./head/list.c
+OBJ := $(patsubst %.c,%.o,$(filter %.c,$(C_SRCS)))
 
-$(TARGET) : $(obj)
-	$(CC) $(INC) $(CFLAGS)  $(obj)  -o $(TARGET)
 
-	# @echo "=============run program================="
-	@./$(TARGET)
-	@-rm *.o
+$(TARGET) : $(OBJ_PATH)/$(OBJ)
+	$(CC) $(INC) $(CFLAGS)  $(OBJ)  -o $(TARGET)
+	@find . -name "*.o"  | xargs rm -f
+	# @-rm *.exe
 
-%.o : %.c
+$(OBJ): %.o : %.c
 	$(CC) $(INC) $(CFLAGS) -c $< -o $@
 
+.PHONY : clean
 clean:
 	@-rm *.exe
 	@-rm *.o
