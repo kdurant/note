@@ -1,5 +1,5 @@
-# cc = gcc -std=c99
-cc = clang
+cc = gcc -std=c99
+# cc = clang
 flags = -D TEST
 
 prog = main 

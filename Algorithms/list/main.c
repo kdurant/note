@@ -16,9 +16,10 @@ int main(void)
     list_append(&test, 30);
     list_append(&test, 33);
     list_append(&test, 43);
-    list_insert(&test, 2, 11);
-    list_insert(&test, 3, 22);
+    // list_insert(&test, 2, 11);
+    // list_insert(&test, 3, 22);
     printf("link list length is %d\n", list_length(test));
     list_print(test);
+    printf("%d\n", list_find_item(test, 33));
     return 0;
 }
