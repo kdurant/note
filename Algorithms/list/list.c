@@ -11,7 +11,7 @@ bool list_init(LinkList* l)
 {
 #ifdef TEST
     printf("point LinkList(struct Node*) size is %llu\n", sizeof(LinkList));
-    printf("Node size is %llu\n",  sizeof(Node));
+    printf("Node size is %llu\n",  sizeof(ListNode));
 #endif
     // 给头结点申请内存空间
     LinkList p = (LinkList)malloc(sizeof(ListNode));
@@ -59,6 +59,23 @@ bool list_append(LinkList* l, ElemType node)
 bool list_insert(LinkList* l, int pos, ElemType node)
 {
     LinkList head = *l;
+    LinkList new = (LinkList)malloc(sizeof(ListNode));
+    copy_node(&new, node);
+
+    while(pos > 0)
+    {
+        head = head->next;
+        pos--;
+    }
+    // 插入结点
+    new->next = head->next;
+    head->next = new;
+    return true;
+}
+
+bool list_test(LinkList l, int pos, ElemType node)
+{
+    LinkList head = l;
     LinkList new = (LinkList)malloc(sizeof(ListNode));
     copy_node(&new, node);
 

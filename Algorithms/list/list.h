@@ -19,14 +19,20 @@ typedef struct ListNode
 typedef struct ListNode* LinkList;
 
 /**
- * @brief 将链表类型声明为LinkList(struct Node*)，可以通过改变地址，方便的修改list指向的结点
- *        test 是链表的头指针而已, 移动头指针指向链表的具体结点
+ * @brief test 是链表的头指针而已, 移动头指针指向链表的具体结点
+struct Node							
+----------------------------------------------------------------
+head		    | node1		    | node2		    | node3	
+data		    | data	10	    | data	20	    | data	30
+next	0x1000	| next	0x2000	| next	0x3000	| next	0x3000
+----------------------------------------------------------------
+struct Node * test;   // test的值是结点的地址
+func(LinkList* l, ElemType node)
  */
 extern LinkList test;
 
 /**
  * @brief 
- * LinkList*list == struct Node* * list, 这里是个二级指针， list是个指向struct Node*变量的指针变量
  * 初始化的工作：
  * 1. 给头结点(header or dummy node)申请内存空间
  * 2. 将头结点的指针域设置为NULL
@@ -60,6 +66,7 @@ bool list_append(LinkList* l, ElemType node);
  * @return false 
  */
 bool list_insert(LinkList* l, int pos, ElemType node);
+bool list_test(LinkList l, int pos, ElemType node);
 
 /**
  * @brief 删除链表指定位置的结点. 例如链表原有数据为3, 1, 2, 4
