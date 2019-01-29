@@ -1,4 +1,4 @@
-#include "stack.h"
+#include "linkstack.h"
 
 struct Node
 {
@@ -36,7 +36,16 @@ Stack CreateStack(void)
 
 void Pop(Stack S)
 {
+    PtrToNode FirstCell;
 
+    if(IsEmpty(S))
+        return;
+    else
+    {
+        FirstCell = S->Next;
+        S->Next = S->Next->Next;
+        free(FirstCell);
+    }
 }
 
 void Push(ElementType X, Stack S)
@@ -48,7 +57,9 @@ void Push(ElementType X, Stack S)
         return;
     else
     {
-        
-    }
-    
+        // 拥有头指针
+        temp->Element = X;
+        temp->Next = S->Next;
+        S->Next = temp;
+    } 
 }

@@ -1,8 +1,9 @@
-#ifndef STACK_H
-#define STACK_H
+#ifndef LINKSTACK_H
+#define LINKSTACK_H
 
 #include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef int ElementType;
 
