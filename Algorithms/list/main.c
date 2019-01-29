@@ -6,20 +6,19 @@
 
 int main(void)
 {
+	LinkList test;
     if(list_init(&test))
     {
         printf("link list init success\n");
     }
     
     list_append(&test, 20);
-    // list_print(test);
     list_append(&test, 30);
     list_append(&test, 33);
     list_append(&test, 43);
-    list_test(test, 2, 11);
-    // list_insert(&test, 2, 22);
+	test = list_reverse(test);
     printf("link list length is %d\n", list_length(test));
     list_print(test);
-    printf("%d\n", list_find_item(test, 33));
+    //printf("%d\n", list_find_item(test, 33));
     return 0;
 }

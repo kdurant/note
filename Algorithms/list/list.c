@@ -1,7 +1,5 @@
 #include "list.h"
 
-LinkList test;
-
 static void copy_node(LinkList* l, ElemType node)
 {
     (*l)->data = node;
@@ -146,4 +144,26 @@ int list_length(LinkList l)
 		i++;
     } 
     return i;
+}
+
+// LinkList  list_reverse(LinkList l)
+struct ListNode*  list_reverse(struct ListNode* l)
+{
+    if(l == NULL || l->next == NULL)
+        return l;
+    LinkList p = l;
+    LinkList q = l->next;       // 原有链表的继续
+    LinkList r;
+    l->next = NULL;		//
+    
+    while(q != NULL)
+    {
+        r = q->next;   // 暂存链表下一次位置, 防止丢失
+        q->next = p;         // 当前节点 插入到新链表
+        
+        p = q;  // 改变p的位置
+        q = r;  // 恢复链表位置, 继续循环操作
+    }
+    l = p;
+    return l;
 }

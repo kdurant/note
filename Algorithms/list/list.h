@@ -28,8 +28,9 @@ next	0x1000	| next	0x2000	| next	0x3000	| next	0x3000
 ----------------------------------------------------------------
 struct Node * test;   // test的值是结点的地址
 func(LinkList* l, ElemType node)
+
+LinkList test;
  */
-extern LinkList test;
 
 /**
  * @brief 
@@ -112,4 +113,13 @@ bool list_is_empty(LinkList l);
  * @return LinkList* 
  */
 LinkList * mergeTwoLists(LinkList * l1, LinkList* l2);
+
+/**
+ * @brief 链表逆序
+ * https://www.jianshu.com/p/84117123f709
+ * @param l 
+ * @return true 
+ * @return false 
+ */
+LinkList  list_reverse(LinkList l);
 #endif
