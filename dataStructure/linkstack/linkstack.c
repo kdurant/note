@@ -11,6 +11,7 @@ int IsEmpty(Stack S)
     return S->Next == NULL;
 }
 
+
 void MakeEmpty(Stack S)
 {
     if(S == NULL)
@@ -23,13 +24,19 @@ void MakeEmpty(Stack S)
         }
     }
 }
+
+/**
+ * @brief Create a Stack object
+ * 带有头结点
+ * @return Stack 
+ */
 Stack CreateStack(void)
 {
     Stack S;
     S = (Stack)malloc(sizeof(struct Node));
     if(S == NULL)
         return NULL;
-    S->Next == NULL;
+    S->Next = NULL;
     MakeEmpty(S);
     return S;
 }
@@ -42,7 +49,7 @@ void Pop(Stack S)
         return;
     else
     {
-        FirstCell = S->Next;
+        FirstCell = S->Next;    // 保存带删除结点, 防止内存泄漏
         S->Next = S->Next->Next;
         free(FirstCell);
     }
@@ -62,4 +69,12 @@ void Push(ElementType X, Stack S)
         temp->Next = S->Next;
         S->Next = temp;
     } 
+}
+
+ElementType Top(Stack S)
+{
+    if(!IsEmpty(S))
+        return S->Next->Element;
+    else
+        return 0;
 }

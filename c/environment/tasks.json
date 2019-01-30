@@ -43,7 +43,7 @@
 //     "version": "2.0.0",
 //     "tasks": [
 //         {
-//             "label": "bulid main",
+//             "label": "build main",
 //             "command": "make",
 //             "type": "shell",
 //             "group": {
