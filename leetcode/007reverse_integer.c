@@ -14,7 +14,7 @@
  * @param x 
  * @return int 
  */
-int reverse_integer(int x)
+int reverse(int x) {
 {
     int pop;
     int result;

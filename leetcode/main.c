@@ -6,42 +6,42 @@
 
 #include<limits.h>
 
-/**
- * Return an array of size *returnSize.
- * Note: The returned array must be malloced, assume caller calls free().
- */
-int* intersect(int* nums1, int nums1Size, int* nums2, int nums2Size, int* returnSize) {
-    int *a;
-    *returnSize = 0;
-    if(nums1Size >= nums2Size)
-        a = (int *)malloc(sizeof(int)*nums2Size);
-    else
-        a = (int *)malloc(sizeof(int)*nums1Size);
+int divide(int dividend, int divisor) {
+    int num = 0;
+    int sign = 0;
 
-    for(size_t i = 0; i < nums1Size; i++)
+    if(dividend >= 0 && divisor > 0)
+        sign = 1;
+    else if(dividend <= 0 && divisor < 0)
+        sign = 1;
+    else 
+        sign = 0;
+
+    dividend = dividend >= 0 ? dividend : 0 - dividend;
+    divisor = divisor > 0 ? divisor : 0 - divisor;
+
+
+    while( dividend >= divisor)
     {
-        if(i > 1 && (nums1[i] == nums1[i-1]))
-            break;
-        for(size_t j = 0; j < nums2Size; j++)
-        {
-            if(nums1[i] == nums2[j])
-            {
-                a[*returnSize] = nums1[i]; 
-                (*returnSize)++;
-                break;
-            }
-        }
+        dividend -= divisor;
+        num = num + 1;
     }
-    return a;
+    if (sign == 0)
+        num = INT_MIN + (INT_MIN - num);
+    return num;
 }
 
 int main()
 {
     // int nums[] = {0,11,0,3};
-    int nums1[] = {1,2,2,2,1};
-    int nums2[] = {2, 2};
-    int cnt ;
-    intersect(nums1, 5, nums2, 2, &cnt);
-    printf("%d\n", cnt);
+    char nums1[] = {'a', 'b', 'c', 'd'};
+    printf("%d\n", INT_MAX);
+    printf("%d\n", INT_MIN);
+    printf("%d\n", divide(10, 3));
+    printf("%d\n", divide(10, -3));
+    printf("%d\n", divide(-10, 3));
+    printf("%d\n", divide(-10, -3));
+    printf("%d\n", divide(-1, 1));
+    printf("%d\n", divide(-2147483648, -1));
     return 0;
 } 
