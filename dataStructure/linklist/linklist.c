@@ -15,6 +15,16 @@ int IsLast(Position P, List L)
     return P->Next == NULL;
 }
 
+List CreatList(void)
+{
+    List l;
+    l = (PtrToNode)malloc(sizeof(struct Node));
+    if( l == NULL)
+        return NULL;
+    l->Next = NULL;
+    
+}
+
 Position Find(ElementType X, List L)
 {
     Position P;

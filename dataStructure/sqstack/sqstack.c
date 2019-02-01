@@ -30,11 +30,25 @@ Stack CreateStack(int MaxElements)
     
     return S;
 }
+
+void DisposeStack(Stack S)
+{
+    if(S != NULL)
+    {
+        free(S->Array);
+        free(S);
+    }
+}
+
 int IsEmpty(Stack S)
 {
     return S->TopOfStack == EmptyTos;
 }
 
+int IsFull(Stack S)
+{
+    return S->TopOfStack == S->Capacity;
+}
 void MakeEmpty(Stack S)
 {
     S->TopOfStack = EmptyTos;
