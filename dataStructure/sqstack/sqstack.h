@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 typedef int ElementType;
 struct StackRecord;
 typedef struct StackRecord *Stack;
