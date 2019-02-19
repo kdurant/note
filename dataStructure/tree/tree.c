@@ -56,6 +56,38 @@ SearchTree Insert(ElementType X, SearchTree T)
 {
     if(T == NULL)
     {
+        T = malloc(sizeof(struct TreeNode));
+        if(T == NULL)
+            printf("out of space\n");
+        else 
+        {
+            T->Element = X;
+            T->Left = T->Right = NULL;
+        }
+    }
+    else if(X < T->Element)
+    {
+        T->Left = Insert(X, T->Left);
+    }
+    else
+    {
+        if( X > T->Element)
+            T->Right = Insert(X, T->Right);
+    }
+
+    return T;
+}
+
+SearchTree Delete(ElementType X, SearchTree T)
+{
+    Position TmpCell;
+
+    if(T == NULL)
+        printf("Element not found\n");
+    else if(X < T->Element)
+        T->Left = Delete(X, T->Left);
+    else if(X > T->Element)
+    {
         
     }
 }

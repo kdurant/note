@@ -1,7 +1,6 @@
-#include "linklist.h"
+﻿#include "linklist.h"
 
 int main()
 {
-    List l1;
-    
+    List l1 = CreatList();
 }

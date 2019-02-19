@@ -4,3 +4,4 @@ tmp.*
 .vscode
 *.py
 *.o
+*.s
