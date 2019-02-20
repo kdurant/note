@@ -1,4 +1,4 @@
-#include "linklist.h"
+﻿#include "linklist.h"
 struct Node
 {
     ElementType Element;
@@ -13,6 +13,16 @@ int IsEmpty(List L)
 int IsLast(Position P, List L)
 {
     return P->Next == NULL;
+}
+
+List CreatList(void)
+{
+    List l;
+    l = (PtrToNode)malloc(sizeof(struct Node));
+    if( l == NULL)
+        return NULL;
+    l->Next = NULL;
+	return l;
 }
 
 Position Find(ElementType X, List L)
@@ -65,4 +75,18 @@ void Insert(ElementType X, List L, Position P)
     
     TmpCell->Element = X;
     TmpCell->Next = P->Next;
+}
+
+void DeleteList(List L)
+{
+    Position d;
+    Position p = L->Next;
+    L->Next = NULL;
+
+    while(p != NULL)
+    {
+        d = p;
+        p = p->Next;
+        free(d);
+    }
 }
