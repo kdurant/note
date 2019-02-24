@@ -7,3 +7,10 @@
 4.  同一个module/interface/checker/program中声明多个clocking块，同一个信号也可以出现在不同的clocking块中。
 
 # 作用
+1. 将输出信号滞后clk指定时间后输出
+```verilog
+  clocking ram @(posedge clk);
+     input  #1 dout;
+     output #1 din,addr,ce,we;
+  endclocking
+```
