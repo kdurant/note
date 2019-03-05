@@ -193,6 +193,7 @@ endmodule
 ```
 
 # 接口参数, 参数类及虚接口
+带参数的virtual interface在class中时, 需要将class也有参数, 将class的参数传递给interface
 1. 接口声明
 ```verilog
 interface axi_stream_bfm #
