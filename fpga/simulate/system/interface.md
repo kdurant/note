@@ -191,3 +191,52 @@ memory_model U_model(miff);
 test U_test(miff);
 endmodule
 ```
+
+# 接口参数, 参数类及虚接口
+1. 接口声明
+```verilog
+interface axi_stream_bfm #
+(
+    parameter WIDTH = 8
+)
+(
+    input                               s_aclk,
+    input                               s_aresetn
+);
+
+    logic                               m_axis_tvalid;
+    logic                               m_axis_tlast;
+    logic                               m_axis_tready;  // slave控制此端口
+    logic [WIDTH-1:00]                  m_axis_tdata;
+endinterface
+```
+
+2. 接口例化
+```verilog
+axi_stream_bfm #
+(
+    .WIDTH  (8)
+)
+axi_stream_if 
+(
+    .s_aclk       (    clk      ),
+    .s_aresetn    (    rst_n    )
+);
+```
+
+3. 参数类声明及虚接口
+```verilog
+class axi_stream_drive #(int width = 16);
+    virtual axi_stream_bfm #(.WIDTH (width) )    bfm;
+    /*
+     * 静态属性
+     */
+    function new(virtual axi_stream_bfm #(.WIDTH (width) ) b);  // 需要赋初值的属性
+        bfm = b;
+    endfunction
+```
+
+4. 参数类例化
+```verilog
+axi_stream_drive #(8) axi_stream_drive_h;
+```
