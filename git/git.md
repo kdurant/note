@@ -71,8 +71,14 @@ emoji                                   | emoji 代码                   | commi
 
 # 远程仓库操作
 ## 修改远程仓库地址
+1. 方法一
 git remote 查看所有远程仓库， git remote xxx 查看指定远程仓库地址
 git remote set-url origin http://192.168.100.235:9797/john/git_test.git
+2. 方法二
+```
+git remote rm origin
+git remote add origin [url]
+```
 
 ## 提交新的本地分支到远程仓库
 1. 切换到需要提交的分支
