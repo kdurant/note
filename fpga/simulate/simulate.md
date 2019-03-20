@@ -60,10 +60,43 @@ begin
 end
 ```
 
+# 使用systemverilog使用DPI调用C函数
+1. 准备C函数
+```c
+int factorial(int i)
+{
+    if(i <= 1)
+    {
+        return i;
+    }
+    else 
+        return i * factorial(i - 1);
+}
+```
+2. 在systemverilog里导入
+```verilog
+import "DPI-C" function int factorial(input int i);
+
+program automatic study ();
+    initial
+    begin
+        for(int i = 0; i < 15; i = i + 1 )
+        begin
+            $display("%0d != %0d", i, factorial(i));
+        end
+    end
+
+endprogram
+```
+
+3. 编译. 最关键的一步
+```
+vlog hello.c
+vlog -sv -incr sv_st.sv
+```
 
 # Tips
 
 Q: 如何不修改HDL代码的情况下，改变参数以便更好的仿真
 A: 使用defparam
 `defparam path.reg = value;`
-
