@@ -13,10 +13,19 @@ git submodule init
 git submodule update 
 ```
 
-
 ## 更新子模块
 1. 进入子模块的目录，子模块和正常木块没有什么两样，按照正常操作即可
 2. 子模块提交后，上一级模块再提交
+
+## 删除子模块
+```shell
+# 逆初始化模块，其中{MOD_NAME}为模块目录，执行后可发现模块目录被清空
+git submodule deinit {MOD_NAME} 
+# 删除.gitmodules中记录的模块信息（--cached选项清除.git/modules中的缓存）
+git rm --cached {MOD_NAME} 
+# 提交更改到代码库，可观察到'.gitmodules'内容发生变更
+git commit -am "Remove a submodule." 
+```
 
 # commit写法
 用于说明 commit 的类别，只允许使用下面7个标识。
