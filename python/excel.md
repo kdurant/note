@@ -15,6 +15,9 @@ table = data.sheet_by_name(sheet_name)
 # 表格有多少行内容
 table.nrows
 
-#返回由该行中所有的单元格对象组成的列表
+#返回由该行中所有的单元格 对象 组成的列表
 table.row(row_num)
+
+#返回由该行中所有单元格的 数据 组成的列表
+table.row_values(rowx, start_colx=0, end_colx=None)
 ```
