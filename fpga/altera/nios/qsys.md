@@ -1,9 +1,12 @@
-# nios_cpu.qsys
+# nios_cpu.qsys 配置信息
 * clk : 100Mhz
 * on-chip ram: 96KB
 * system clock
 * timestamp timer
 * epcs flash
+
+# 连线原则
+数据主端口(data_master)与所有的外设IP核连接，而指令主端口(instruction_master)只连接存储器IP核。
 
 # PIO操作
 
