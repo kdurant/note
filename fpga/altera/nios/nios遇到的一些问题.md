@@ -39,3 +39,23 @@ quartus编译nios核时只需要在工程里添加一个qsys文件即可
 > 可以通过修改 BSP Editor -> Adanvce -> hal.linker的前两项来完成
 > 使能前两项: 固化程序
 > disable前两项: reset vector选择为flash时也可以进行程序调试
+> 勾选`enable-alt-load_copy-rodata`
+> 勾选`enable-alt-load_copy-exceptions`
+
+# nios II在modelsim里的仿真
+仿真nios所需要的全部文件都在simulation目录下
+
+* 需要编译下列文件
+    - simulation/nios_cpu.v
+    - simulation/submodules/*.v
+    - simulation/submodules/*.vo
+    - simulation/submodules/*.sv
+
+* 将simulation/submodules/下的hex, mif, dat文件copy到modelsim所在目录
+```tcl
+file copy -force ../simulation/submodules/nios_cpu_cpu_cpu_bht_ram.dat ./
+file copy -force ../simulation/submodules/nios_cpu_cpu_cpu_bht_ram.hex ./
+file copy -force ../simulation/submodules/nios_cpu_cpu_cpu_bht_ram.mif ./
+```
+
+* 将software/project_name/mem_init下的文件copy到modelsim所在目录
