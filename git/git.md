@@ -29,15 +29,16 @@ git commit -am "Remove a submodule."
 
 # commit写法
 用于说明 commit 的类别，只允许使用下面7个标识。
-
-    init：(:tada:)项目初始化（用于项目初始化或其他某种行为的开始描述，不影响代码）
     feat：(:sparkles:)新功能
     fix：(:bug:)修补bug
-    docs：(:memo:)文档（documentation）
-    opt：(:zap:)优化和改善，比如弹窗进行确认提示等相关的，不会改动逻辑和具体功能等
     style： (:art:)格式（不影响代码运行的变动）
+    docs：(:memo:)文档（documentation）
     refactor：(:recycle:)重构（即不是新增功能，也不是修改bug的代码变动）
     test：(:white_check_mark:)增加测试
+    chore：构建过程或辅助工具的变动
+
+    init：(:tada:)项目初始化（用于项目初始化或其他某种行为的开始描述，不影响代码）
+    opt：(:zap:)优化和改善，比如弹窗进行确认提示等相关的，不会改动逻辑和具体功能等
     save：单纯地保存记录
     other：用于难以分类的类别（不建议使用，但一些如删除不必要的文件，更新.ignore之类的可以使用）
     bookmark: (:bookmark:) 发行/版本标签
