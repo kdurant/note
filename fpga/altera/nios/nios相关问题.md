@@ -1,7 +1,10 @@
 # 创建工程
-1. 首先独立创建bsp工程, 版本工具忽略此目录
-2. 创建nios工程时选择已经存在的bsp工程
+1. 创建bsp. `File -> New -> Nios II Board Support Package`
+2. 创建nios工程. `File -> New -> Nios II Application`
 3. 用户头文件和源文件放在nios工程下
+
+> 可以在一个BSP的基础上建立很多Application
+> 根据同一个sopcinfo建立的BSP是相同的, 所以版本工具可以忽略此目录
 
 
 # eclipse开启c99模式
@@ -67,6 +70,8 @@ file copy -force ../simulation/submodules/nios_cpu_cpu_cpu_bht_ram.mif ./
 ```
 
 * 将software/project_name/mem_init下的文件copy到modelsim所在目录
+
+* 需使用nios先启动一次仿真, 然后生成了hex文件后, 自己的仿真才能进行
 
 
 # epcs使用
