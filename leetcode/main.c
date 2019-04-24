@@ -6,20 +6,16 @@
 
 #include<limits.h>
 
-struct test
+struct
 {
-	char data[4];
-};
-
-struct test t =
-{
-	.data = "2.00"
-};
+	unsigned int x1 : 3;
+	unsigned int x2 : 33;
+	// unsigned int x3 : 3;
+} Age;
 
 int main()
 {
-	struct test *p = &t;
-	p->data[0] = '4';
-    printf("%s\n", t.data);
-    return 0;
-} 
+	Age.x1 = 2;
+	printf("Age size is %d\n", sizeof(Age));
+	return 0;
+}
