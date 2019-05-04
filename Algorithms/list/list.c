@@ -31,7 +31,7 @@ bool list_append(LinkList* l, ElemType node)
      * @brief LinkList *q = l;
      * 
      */
-	LinkList q = *l;
+	LinkList q = *l;        // q指向头结点
     LinkList p = (LinkList)malloc(sizeof(ListNode));
     if(p == NULL)
         return false;
