@@ -1,6 +1,22 @@
-# 创建工程
+# 创建nios工程
 1. 创建bsp. `File -> New -> Nios II Board Support Package`
-2. 创建nios工程. `File -> New -> Nios II Application`
+   第一次创建: nios2-bsp $BSP_TYPE $BSP_DIR $SOPC_DIR $NIOS2_BSP_ARGS
+    - $BSP_TYPE, 一般为`hal`
+    - $BSP_DIR, 生成bsp文件的目录
+    - $SOPC_DIR, `sopcinfo`文件目录
+    - $NIOS2_BSP_ARGS, `--cpu-name cpu`, cpu-name为qsys中cpu的名称
+   
+   > `nios2-bsp hal ./xxx_bsp ../nios_cpu.sopcinfo --cpu-name cpu` 
+   > 在图形界面中有`Use relative path`选项, 会影响生成的Makefile中`SOPC_FILE`使用的路径方式
+
+   更新bsp:
+   `nios2-bsp-generate-files --bsp-dir . --settings settings.bsp`
+
+   
+2. 创建nios工程. 
+    * `File -> New -> Nios II Application and BSP from Template`
+    * `File -> New -> Nios II Application`
+
 3. 用户头文件和源文件放在nios工程下
 
 > 可以在一个BSP的基础上建立很多Application
@@ -16,6 +32,7 @@
 # nios FIFO写数据
 1. 调用api `altera_avalon_fifo_write_fifo()`写入0x1234abcd，FPGA接受到的数据时0xabcd1234，所以写入(读出)数据的时候要交换高低位
 2. for循环写入数据时, 大概135个时钟周期写入一个数据(125Mhz)
+3. for循环读出数据时, 大概135个时钟周期读出一个数据(`altera_avalon_fifo_read_fifo`)
 
 # nios中内联汇编
 
