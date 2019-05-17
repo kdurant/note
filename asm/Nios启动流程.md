@@ -33,78 +33,14 @@
 # .equ
 
 ```mipsasm
-#include "system.h"
-#include "nios2.h"
-
-/* Setup header files to work with assembler code. */
-#define ALT_ASM_SRC
-
-/* Debug logging facility */
-#include "sys/alt_log_printf.h"
-
-/*************************************************************************\
-|                                MACROS                                   |
-\*************************************************************************/
-
-/*
- * The new build tools explicitly define macros when alt_load()
- * must be called.  The define ALT_LOAD_EXPLICITLY_CONTROLLED tells us that
- * those macros are controlling if alt_load() needs to be called.
- */
-#ifdef ALT_LOAD_EXPLICITLY_CONTROLLED
-
-/* Need to call alt_load() if any of these sections are being copied. */
-#if defined(ALT_LOAD_COPY_RODATA) || defined(ALT_LOAD_COPY_RWDATA) || defined(ALT_LOAD_COPY_EXCEPTIONS)
-#define CALL_ALT_LOAD
-#endif
-
-#else /* !ALT_LOAD_EXPLICITLY_CONTROLLED */
-
-/*
- * The legacy build tools use the following macros to detect when alt_load()
- * needs to be called.
- */
-
-#define __ALT_LOAD_SECTIONS(res, text, rodata, exc) \
-  ((res##_BASE != rodata##_BASE) ||                 \
-   (res##_BASE != rwdata##_BASE) ||                 \
-   (res##_BASE != exc##_BASE))
-
-#define _ALT_LOAD_SECTIONS(res, text, rodata, exc) \
-    __ALT_LOAD_SECTIONS(res, text, rodata, exc)
-
-#define ALT_LOAD_SECTIONS _ALT_LOAD_SECTIONS(ALT_RESET_DEVICE,  \
-                                             ALT_RODATA_DEVICE, \
-                                             ALT_RWDATA_DEVICE, \
-                                             ALT_EXCEPTIONS_DEVICE)
-
-/* Call alt_load() if there is no bootloader and ALT_LOAD_SECTIONS isn't 0. */
-#if defined(ALT_NO_BOOTLOADER) && ALT_LOAD_SECTIONS
-#define CALL_ALT_LOAD
-#endif
-
-#endif /* !ALT_LOAD_EXPLICITLY_CONTROLLED */
-
-/*
- * When the legacy build tools define a macro called ALT_NO_BOOTLOADER,
- * it indicates that initialization code is allowed at the reset address.
- * The new build tools define a macro called ALT_ALLOW_CODE_AT_RESET for
- * the same purpose.
- */
-#ifdef ALT_NO_BOOTLOADER
-#define ALT_ALLOW_CODE_AT_RESET
-#endif
 
 /*************************************************************************\
 |                         EXTERNAL REFERENCES                             |
 \*************************************************************************/
 
 /*
- * The entry point for user code is either "main" in hosted mode, or
- * "alt_main" in standalone mode. These are explicitly referenced here,
- * to ensure they are built into the executable. This allows the user
- * to build them into libraries, rather than supplying them in object
- * files at link time.
+用户代码的入口点在host模式下是main，在standalone模式下是alt_main。
+这里明确引用了这些，以确保它们内置在可执行文件中。 这允许用户将它们构建到库中，而不是在链接时将它们提供在目标文件中。
  */
     .globl main
     .globl alt_main
@@ -131,28 +67,20 @@
 \*************************************************************************/
 
 /*
- * This is the reset entry point for Nios II.
- *
- * At reset, only the cache line which contain the reset vector is
- * initialized by the hardware. The code within the first cache line
- * initializes the remainder of the instruction cache.
+这是Nios的复位入口点
+在复位时，只有包含复位向量的高速缓存由硬件初始化。 第一个缓存行中的代码初始化其余部分的指令缓存。
  */
 
     .section .entry, "xa"
     .align 5
 
 /*
- * Explicitly allow the use of r1 (the assembler temporary register)
- * within this code. This register is normally reserved for the use of
- * the assembler.
+明确允许在此代码中使用r1（汇编程序临时寄存器）。 该寄存器通常保留用于汇编程序。
  */
     .set noat
 
 /*
- * Some tools want to know where the reset vector is.
- * Code isn't always provided at the reset vector but at least the
- * __reset label always contains the reset vector address because
- * it is defined at the start of the .entry section.
+有些工具想知道复位向量的位置。 复位向量并不总是提供代码，但至少__reset标签始终包含复位向量地址，因为它是在.entry部分的开头定义的。
  */
 
     .globl __reset
@@ -160,34 +88,29 @@
 __reset:
 
 /*
- * Initialize the instruction cache if present (i.e. size > 0) and
- * reset code is allowed unless optimizing for RTL simulation.
- * RTL simulations can ensure the instruction cache is already initialized
- * so skipping this loop speeds up RTL simulation.
- *
- * When ECC is present, need to execute initi for each word address
- * to ensure ECC parity bits in cache RAM get initialized.
+如果存在，则初始化指令高速缓存（即大小> 0）并且允许重置代码，除非优化RTL仿真。
+RTL仿真可确保指令高速缓存已初始化，因此跳过此循环可加速RTL仿真。
+ 
+当ECC存在时，需要为每个字地址执行initi，以确保缓存RAM中的ECC奇偶校验位得到初始化。
  */
 
 #if NIOS2_ICACHE_SIZE > 0 && defined(ALT_ALLOW_CODE_AT_RESET) && (!defined(ALT_SIM_OPTIMIZE) || defined(NIOS2_ECC_PRESENT))
-    /* Assume the instruction cache size is always a power of two. */
 #if NIOS2_ICACHE_SIZE > 0x8000
     movhi r2, %hi(NIOS2_ICACHE_SIZE)
 #else
     movui r2, NIOS2_ICACHE_SIZE
 #endif
 
-// 将NIOS2_ICACHE_SIZE放到r2中, why?
-
 0:
-    initi r2
+# 上面将r2的值设置为 NIOS2_ICACHE_SIZE
+# 现在个循环将 NIOS2_ICACHE_SIZE - 32
+    initi r2        # 初始化指令缓存指令
     addi r2, r2, -NIOS2_ICACHE_LINE_SIZE
     bgt r2, zero, 0b
 1:
 
     /*
-     * The following debug information tells the ISS not to run the loop above
-     * but to perform its actions using faster internal code.
+以下调试信息告诉ISS不要运行上面的循环，而是使用更快的内部代码执行其操作。
      */
     .pushsection .debug_alt_sim_info
     .int 1, 1, 0b, 1b
@@ -195,11 +118,10 @@ __reset:
 #endif /* Initialize Instruction Cache */
 
 /*
- * Jump to the _start entry point in the .text section if reset code
- * is allowed or if optimizing for RTL simulation.
+如果允许重置代码或优化RTL模拟，则跳转到.text部分的_start入口点。
  */
 #if defined(ALT_ALLOW_CODE_AT_RESET) || defined(ALT_SIM_OPTIMIZE)
-    /* Jump to the _start entry point in the .text section. */
+    /* 跳转到_start */
     movhi r1, %hi(_start)
     ori r1, r1, %lo(_start)
     jmp r1
@@ -241,7 +163,7 @@ _start:
      * to set STATUS.CRS to 0.
      */
     
-    /* Get the current register set number (STATUS.CRS). */
+    /* Get the current register set number (STATUS.CRS).  status & 0x0000fc00 */
     rdctl r2, status
     andi r2, r2, NIOS2_STATUS_CRS_MSK
     
@@ -307,8 +229,7 @@ _start:
     ALT_LOG_PUTS(alt_log_msg_stackpointer)
 
     /*
-     * Now that the caches are initialized, set up the stack pointer and global pointer.
-     * The values provided by the linker are assumed to be correctly aligned.
+现在初始化了缓存，设置堆栈指针和全局指针。 假设链接器提供的值已正确对齐。
      */
     movhi sp, %hi(__alt_stack_pointer)
     ori sp, sp, %lo(__alt_stack_pointer)
