@@ -5,10 +5,23 @@
 * timestamp timer
 * epcs flash
 
-# 连线原则
+# 连线相关
+## Nios CPU
+* Nios II Process生成时，data_master和instruction_master都已经连接到了debug_mem_slave
+* Nios II Process的debug_reset_request可以连到其他IP的reset端口上
+* 数据主端口(data_master)与所有的外设IP核的Avalon Memory Mapped Slave连接
+* 指令主端口(instruction_master)只连接存储器IP核的Avalon Memory Mapped Slave端口
+
+## DDR2 SDRAM Controller with ALTMEMPHY
+* refclk是输入时钟，由clk source直接给入
+* soft_reset_n可以连接到 Nios II Process的debug_reset_request端口
+* global_reset_n连到clk source的clk_reset端口
+* reset_request_n可以连到其他IP的reset引脚
+* sysclk作为其他IP的时钟输入
+
+
 * clk IP核的时钟信号`clk`与其余的各个IP核的`clk`连接起来
 * clk IP核的时钟信号`reset`与其余的各个IP核的`reset`连接起来
-* 数据主端口(data_master)与所有的外设IP核连接，而指令主端口(instruction_master)只连接存储器IP核。
 
 # 最小系统模板
 ```verilog
