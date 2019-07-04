@@ -19,8 +19,24 @@ SearchTree MakeEmpty(SearchTree T);
  * @return Position 
  */
 Position Find(ElementType X, SearchTree T);
+
+/**
+ * @brief 返回树中最小单位的位置
+ * 
+ * @param T 
+ * @return Position 
+ */
 Position FindMin(SearchTree T);
+
+/**
+ * @brief 返回树中最小单位的位置
+ * 
+ * @param T 
+ * @return Position 
+ */
 Position FindMax(SearchTree T);
+
+
 SearchTree Insert(ElementType X, SearchTree T);
 SearchTree Delete(ElementType X, SearchTree T);
 ElementType Retrieve(Position P);
