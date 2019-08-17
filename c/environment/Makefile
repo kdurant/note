@@ -24,8 +24,9 @@ OBJ := $(patsubst %.c,%.o,$(filter %.c,$(C_SRCS)))
 
 $(TARGET) : $(OBJ_PATH)/$(OBJ)
 	$(CC) $(INC) $(CFLAGS)  $(OBJ)  -o $(TARGET)
-	@find . -name "*.o"  | xargs rm -f
+	# @find . -name "*.o"  | xargs rm -f
 	# @-rm *.exe
+	./$(TARGET)
 
 $(OBJ): %.o : %.c
 	$(CC) $(INC) $(CFLAGS) -c $< -o $@
