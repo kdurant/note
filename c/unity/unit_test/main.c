@@ -10,7 +10,7 @@ void test_addFunc(void)
 }
 int main(int argc, char const *argv[])
 {
-    test_addFunc();
-    
-    return 0;
+    UNITY_BEGIN();
+    RUN_TEST(test_addFunc);
+    return UNITY_END();
 }

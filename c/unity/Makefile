@@ -1,5 +1,5 @@
 # CC = gcc -std=c99
-CC = clang
+CC = gcc
 CFLAGS  = -std=c99
 CFLAGS += 
 CFLAGS += -I ./src
@@ -12,9 +12,9 @@ obj = main.o use.o unity.o
 $(TARGET) : $(obj)
 	$(CC) $(CFLAGS) -o $(TARGET) $(obj) 
 
+	@-rm *.o
 	@echo "=============run program================="
 	@./$(TARGET)
-	@-rm *.o
 
 main.o:
 	$(CC) $(CFLAGS) -c	./unit_test/main.c  -o main.o 
