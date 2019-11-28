@@ -28,6 +28,8 @@ cp .config/nvim/plugin_config.vim ~/.config/nvim
 cp .config/nvim/plugin_map.vim ~/.config/nvim
 cp .config/nvim/self_fun.vim ~/.config/nvim
 cp .config/nvim/user_plugin.vim ~/.config/nvim
+cp AppData/Local/nvim/coc-settings.json ~/.config/nvim
+cp gtags.conf ~/.config/gtags.conf
 
 if [ ! -d "$ssh_config_folder" ]; then
 	mkdir $ssh_config_folder
