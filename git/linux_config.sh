@@ -4,6 +4,7 @@ sudo -i
 
 # 更换源
 echo "----------------更换软件源-------------------------"
+# https://developer.aliyun.com/mirror
 if [ ! -e "/etc/apt/source.list.bak" ]; then
     cp /etc/apt/source.list /etc/apt/source.list.bak
 fi
@@ -18,19 +19,44 @@ apt install manpages-de manpages-de-dev manpages-dev glibc-doc manpages-posix-de
 
 # 
 echo "----------------python相关-------------------------"
+sudo apt install dos2unix
 sudo apt install cmake
 sudo apt install lsb-core lib32stdc++6
 sudo apt install global
 sudo apt install lua5.3
 sudo apt install python3-pip
-pip3 install pynvim
-pip3 install ipython
+sudo apt install python-pip
+
+if [ ! -d "$HOME/.pip" ]; then
+    mkdir  $HOME/.pip; cd $HOME/.pip
+    echo "[global] 
+index-url = http://pypi.douban.com/simple 
+[install] 
+trusted-host=pypi.douban.com" > pip.config
+fi
+
+sudo pip2 install --upgrade pynvim
+sudo pip3 install --upgrade pynvim
+sudo pip3 install ipython
+
+
+sudo apt install npm
+npm config set registry http://registry.npm.taobao.org/
+sudo npm install -g yarn
+yarn config set registry https://registry.npm.taobao.org -g
+yarn config set sass_binary_site http://cdn.npm.taobao.org/dist/node-sass -g
+
+sudo npm i -g bash-language-server
 
 # 安装clang 
 echo "----------------安装clang-------------------------"
+# sudo apt install clang 
+# sudo apt install clang-tools
+# sudo apt install clang-format
+
 which clang | grep clang 
 if [ $? -ne 0 ]; then
-    if [ ! -d "/home/wj/program" ]; then
+    if [ ! -d "$HOME/program" ]; then
         mkdir program; cd program
         wget http://releases.llvm.org/9.0.0/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
         tar xvJf clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
@@ -50,3 +76,4 @@ else
     echo "export PATH=$PATH:~/program/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf/bin" >> ~/.bashrc
     source ~/.bashrc
 fi
+
