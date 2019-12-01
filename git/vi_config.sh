@@ -46,5 +46,12 @@ if [ ! -d $ssh_config_folder ]; then
 	chmod 600 $ssh_config_folder/id_rsa.pub
 fi
 
+git config --global user.email "wj@163.com"
+git config --global user.name "wj"
+git config --global alias.st "status"
+git config --global alias.br "branch"
+git config --global alias.lo "log --graph --pretty=oneline"
+git config --global alias.co "commit -m"
+
 #git clone https://github.com/kdurant/bookmark
 
