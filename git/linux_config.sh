@@ -30,23 +30,21 @@ sudo apt install python-pip
 if [ ! -d "$HOME/.pip" ]; then
     mkdir  $HOME/.pip; cd $HOME/.pip
     echo "[global] 
-index-url = http://pypi.douban.com/simple 
-[install] 
-trusted-host=pypi.douban.com" > pip.config
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple" > pip.config
 fi
 
-sudo pip2 install --upgrade pynvim
+sudo pip install --upgrade pynvim
 sudo pip3 install --upgrade pynvim
 sudo pip3 install ipython
 
-
+sudo apt install nodejs
 sudo apt install npm
 npm config set registry http://registry.npm.taobao.org/
 sudo npm install -g yarn
 yarn config set registry https://registry.npm.taobao.org -g
 yarn config set sass_binary_site http://cdn.npm.taobao.org/dist/node-sass -g
 
-sudo npm i -g bash-language-server
+sudo npm  i -g bash-language-server
 
 # 安装clang 
 echo "----------------安装clang-------------------------"

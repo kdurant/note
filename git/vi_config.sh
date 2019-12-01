@@ -1,7 +1,6 @@
 #!/bin/bash
 
-#curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-   # https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 vim_config_folder='vimrc'
 
@@ -32,9 +31,11 @@ cp .config/nvim/user_plugin.vim ~/.config/nvim
 cp AppData/Local/nvim/coc-settings.json ~/.config/nvim
 dos2unix ~/.config/nvim/coc-settings.json
 cp gtags.conf ~/.config/gtags.conf
-cp -r AppData/Local/coc/ultisnips /home/wj/.config/coc
 
-/home/wj/.config/coc/ultisnips
+if [ ! -d $HOME/.config/coc/ultisnips ]; then
+	mkdir -p $HOME/.config/coc/ultisnips
+fi
+cp -r AppData/Local/coc/ultisnips /home/wj/.config/coc
 
 if [ ! -d $ssh_config_folder ]; then
 	mkdir $ssh_config_folder
