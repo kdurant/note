@@ -41,6 +41,9 @@ if [ ! -d $ssh_config_folder ]; then
 	mkdir $ssh_config_folder
 	cp .ssh/id_rsa $ssh_config_folder
 	cp .ssh/id_rsa.pub $ssh_config_folder
+
+	chmod 600 $ssh_config_folder/id_rsa
+	chmod 600 $ssh_config_folder/id_rsa.pub
 fi
 
 #git clone https://github.com/kdurant/bookmark
