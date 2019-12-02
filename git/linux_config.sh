@@ -46,29 +46,62 @@ yarn config set sass_binary_site http://cdn.npm.taobao.org/dist/node-sass -g
 
 sudo npm  i -g bash-language-server
 
+# git配置
+echo "----------------配置git，ssh-------------------------"
+ssh_config_folder="$HOME/.ssh"
+vim_config_folder="$HOME/vimrc"
+if [ ! -d "$vim_config_folder" ]; then
+    echo "--------------------download config file---------------------"
+    git clone https://github.com/kdurant/vimrc $vim_config_folder
+else
+    cd $vim_config_folder
+    echo "--------------------update config file-----------------------"
+    git pull
+    cd ..
+fi
+if [ ! -d $ssh_config_folder ]; then
+    mkdir $ssh_config_folder
+    cp .ssh/id_rsa $ssh_config_folder
+    cp .ssh/id_rsa.pub $ssh_config_folder
+
+    chmod 600 $ssh_config_folder/id_rsa
+    chmod 600 $ssh_config_folder/id_rsa.pub
+fi
+git config --global user.email "wj@163.com"
+git config --global user.name "wj"
+git config --global alias.st "status"
+git config --global alias.br "branch"
+git config --global alias.lo "log --graph --pretty=oneline"
+git config --global alias.co "commit -m"
+
+echo "alias update_vim='/home/wj/.config/nvim/vi_config.sh'" >> ~/.bashrc
+
 # 安装clang 
-echo "----------------安装clang-------------------------"
 # sudo apt install clang 
 # sudo apt install clang-tools
 # sudo apt install clang-format
 
 which clang | grep clang 
 if [ $? -ne 0 ]; then
+    echo "----------------安装clang-------------------------"
     if [ ! -d "$HOME/program" ]; then
         mkdir program; cd program
         wget http://releases.llvm.org/9.0.0/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
         tar xvJf clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
     fi
 
-    echo "export PATH=$PATH:~/program/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04/bin" >> ~/.bashrc
+    echo "export PATH=$PATH:$HOME/program/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04/bin" >> ~/.bashrc
+    source ~/.bashrc
+else
+    echo "Has install clang"
 fi
 
 
 # 安装交叉编译器
-echo "----------------安装linaro交叉编译器-------------------------"
 if which arm-linux-gnueabihf-gcc; then
-    echo "Has install!"
+    echo "Has install linaro!"
 else
+    echo "----------------安装linaro交叉编译器-------------------------"
     wget https://releases.linaro.org/components/toolchain/binaries/latest-7/arm-linux-gnueabihf/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz
     tar xvJf gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf.tar.xz
     echo "export PATH=$PATH:~/program/gcc-linaro-7.4.1-2019.02-x86_64_arm-linux-gnueabihf/bin" >> ~/.bashrc
