@@ -144,14 +144,14 @@ which clang | grep clang
 if [ $? -ne 0 ]; then
     echo "----------------安装clang-------------------------"
     if [ ! -d "$HOME/program" ]; then
-        mkdir program; cd program
+        mkdir $HOME/program; cd $HOME/program
         wget http://releases.llvm.org/9.0.0/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
         tar xvJf clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz
     fi
 
     #ls -l /mnt/c &> /dev/null || echo "export PATH=$PATH:$HOME/program/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04/bin" >> ~/.bashrc
     ls -l /mnt/c
-    if [ $? -ne 0 ]  # 非WSL系统
+    if [ $? -ne 0 ];then  # 非WSL系统
         echo "export PATH=$PATH:$HOME/program/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04/bin" >> ~/.bashrc
         source ~/.bashrc
     fi
