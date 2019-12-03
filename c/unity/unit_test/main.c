@@ -6,7 +6,7 @@ extern void tearDown(void);
 
 void test_addFunc(void)
 {
-    TEST_ASSERT_EQUAL(7, add(3, 4));
+    TEST_ASSERT_EQUAL(7, add(3, 3));
 }
 int main(int argc, char const *argv[])
 {
