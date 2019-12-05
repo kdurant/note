@@ -3,8 +3,8 @@
 # 更换源
 echo "----------------更换软件源-------------------------"
 # https://developer.aliyun.com/mirror
-if [ ! -e "/etc/apt/source.list.bak" ]; then
-    cp /etc/apt/source.list /etc/apt/source.list.bak
+if [ ! -e "/etc/apt/sources.list.bak" ]; then
+    cp /etc/apt/sources.list /etc/apt/sources.list.bak
 fi
 
 lsb_release -a | grep 19.04 
@@ -72,10 +72,10 @@ if [ ! -d "$HOME/.pip" ]; then
 index-url = https://pypi.tuna.tsinghua.edu.cn/simple" > pip.config
 fi
 
-if [ -z `pip list | grep pynvim` ]; then 
-    sudo pip install --upgrade pynvim
-    sudo pip3 install --upgrade pynvim
-fi
+# if [ -z `pip list | grep pynvim` ]; then 
+#     sudo pip install --upgrade pynvim
+#     sudo pip3 install --upgrade pynvim
+# fi
 
 if [ -z `pip list | grep ipython` ]; then sudo pip3 install ipython; fi
 
@@ -120,12 +120,12 @@ git config --global alias.co "commit -m"
 ls -l /mnt/c
 if [ $? -ne 0 ]  # 非WSL系统
     cat $HOME/.bashrc | grep nvim
-    if [ $? -ne 0 ]
+    if [ $? -ne 0 ]; then
         echo "alias nvim='/home/wj/program/nvim.appimage'" >> $HOME/.bashrc
     fi
 else
     cat $HOME/.bashrc | grep nvim
-    if [ $? -ne 0 ]
+    if [ $? -ne 0 ]; then
         echo "alias nvim='/home/wj/program//squashfs-root/usr/bin/nvim'" >> $HOME/.bashrc
     fi
 fi
