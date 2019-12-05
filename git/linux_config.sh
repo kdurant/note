@@ -48,6 +48,8 @@ fi
 sudo apt update
 sudo apt upgrade
 
+# ~/.config/user-dirs.dirs
+
 # 安装帮助手册
 echo "----------------安装帮助手册-------------------------"
 sudo apt install manpages-de manpages-de-dev manpages-dev glibc-doc manpages-posix-dev manpages-posix manpages-zh
@@ -62,6 +64,7 @@ if [ -z `which pip` ]; then  sudo apt install python3-pip; fi
 if [ -z `which pip3` ]; then  sudo apt install python-pip; fi
 
 sudo apt install lsb-core lib32stdc++6
+sudo apt install gcc-multilib g++-multilib
 
 if [ ! -d "$HOME/.pip" ]; then
     mkdir  $HOME/.pip; cd $HOME/.pip
