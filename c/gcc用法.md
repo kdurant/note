@@ -31,3 +31,7 @@
 
 # -MMD
 将输出将导入到.d的文件里面:
+
+# 
+> gcc -g -c test.c
+> objdump -d -M intel -S test.o
