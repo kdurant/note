@@ -91,6 +91,121 @@ int main(void)
 - 抽象观察者（Observer）角色：为具体观察者提供一个更新接口。
 - 具体观察者（ConcreteObserver）角色：存储与主题相关的自洽状态，实现抽象观察者提供的更新接口。
 
-![](../fpga/Image/直方图/1.png)
+![](res/Observer.png)
 
 > 在教室里老师还没有来，同学都在干着各的事情，小张正在打游戏，小李正在抄作业.....,  现在同学们要求班长当卧底，监视老师，当老师来了通知大家一声。然后打游戏的马上停止，抄作业的也停止。这里班长相当于是一个通知者， 小张、小李，以及其他同学显然是监听者，他们监听了班长那的消息，一旦老师来了马上采取相关的行动。
+
+```cpp
+#include <vector>
+#include <iostream>
+#include <string>
+#include <list>
+
+using namespace std;
+class ITeacherListenner;
+class ZhangSan;
+class LiSi;
+class INotifier;
+class MonitorNotifier;
+
+// 抽象观察者，为具体观察者提供一个更新借口
+class ITeacherListenner
+{
+public:
+    virtual void onTecherComming(int value) = 0;
+};
+
+// 抽象主题
+class INotifier
+{
+    virtual void registerListenner(ITeacherListenner *l) = 0;
+    virtual void removeListenner(ITeacherListenner *l)   = 0;
+    virtual void notify()                                = 0;
+};
+
+// 具体主题
+class MonitorNotifier : public INotifier
+{
+private:
+    list<ITeacherListenner *> listenners;
+    int                       mValue;
+
+public:
+    void registerListenner(ITeacherListenner *l)
+    {
+        listenners.push_back(l);
+    }
+    void removeListenner(ITeacherListenner *l)
+    {
+        list<ITeacherListenner *>::iterator it;
+        for(it = listenners.begin(); it != listenners.end(); it++)
+        {
+            if(*it == l)
+            {
+                listenners.remove(l);
+                break;
+            }
+        }
+    }
+
+    void notify()
+    {
+        list<ITeacherListenner *>::iterator it;
+
+        for(it = listenners.begin(); it != listenners.end(); it++)
+        {
+            (*it)->onTecherComming(mValue);
+        }
+    }
+
+    void setValue(int value)
+    {
+        mValue = value;
+        notify();
+    }
+};
+
+// 具体观察者
+class ZhangSan : public ITeacherListenner
+{
+public:
+    void stopCopyWork(int value)
+    {
+        cout << "zhangsan stop copy work + " << value << endl;
+    }
+    void onTecherComming(int value)
+    {
+        stopCopyWork(value);
+    }
+};
+
+// 具体观察者
+class LiSi : public ITeacherListenner
+{
+public:
+    void stopCopyWork(int value)
+    {
+        cout << "lisi stop copy work + " << value << endl;
+    }
+    void onTecherComming(int value)
+    {
+        stopCopyWork(value);
+    }
+};
+
+int main(void)
+{
+    cout << "Hello world 1---------------------" << endl;
+    MonitorNotifier monitor;
+    ZhangSan        zs;
+    LiSi            ls;
+    monitor.registerListenner(&zs);
+    monitor.registerListenner(&ls);
+    monitor.setValue(1);
+
+    cout << "Hello world 2---------------------" << endl;
+    monitor.removeListenner(&ls);
+    monitor.setValue(2);
+    return 0;
+}
+```
