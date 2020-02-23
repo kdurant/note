@@ -209,3 +209,299 @@ int main(void)
     return 0;
 }
 ```
+
+# [装饰模式(Decorator)](https://blog.csdn.net/wuzhekai1985/article/details/6672614)
+动态的将职责附加到对象上，若要扩展功能，装饰者提供了比继承更具弹性的代替方案。它使功能具有动态性。比如有一个手机，允许你为手机添加特性，比如增加挂件、屏幕贴膜等。一种灵活的设计方式是，将手机嵌入到另一对象中，由这个对象完成特性的添加，我们称这个嵌入的对象为装饰。这个装饰与它所装饰的组件接口一致，因此它对使用该组件的客户透明。
+![](res/decorator.png)
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+// 坦克抽象类(component)
+class Tank
+{
+public:
+    virtual void shot()
+    {
+        cout << "向我开炮!" << endl;
+    }
+};
+
+// Concrete Component
+// 具体的坦克型号
+class T50 : public Tank
+{
+    virtual void shot()
+    {
+        cout << "T50开炮!" << endl;
+    }
+};
+
+class Decorator : public Tank
+{
+protected:
+    Tank* tank;
+
+public:
+    void decorator(Tank* _tank)  // 没有在构造函数里完成初始化，并不是推荐的写法
+    {
+        this->tank = _tank;
+    }
+    virtual void shot()
+    {
+        tank->shot();
+    }
+};
+
+class DecoratorBigShot : public Decorator
+{
+public:
+    virtual void shot()
+    {
+        cout << "大火力准备完毕" << endl;
+        tank->shot();
+    }
+};
+
+class DecoratorSilentShot : public Decorator
+{
+public:
+    virtual void shot()
+    {
+        cout << "消音完毕" << endl;
+        tank->shot();
+    }
+};
+
+int main(void)
+{
+    Tank* ptank = new T50();  // 基类指针指向派生类对象
+                              //    Decorator* pDecorator = new Decorator();
+                              //    pDecorator->decorator(ptank);  // 装饰器中添加要装饰的对象
+
+    DecoratorBigShot* pBig = new DecoratorBigShot();  // 每个装饰器实现一个功能
+    pBig->decorator(ptank);
+
+    DecoratorSilentShot* pBigSilent = new DecoratorSilentShot();
+    pBigSilent->decorator(pBig);
+    pBigSilent->shot();
+
+    return 0;
+}
+```
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+// 公共抽象类 Component
+class Phone
+{
+public:
+    Phone(){};
+    virtual ~Phone(){};
+    virtual void ShowDecorate(){};
+};
+
+// 具体手机类
+class iPhone : public Phone
+{
+private:
+    string m_name;
+
+public:
+    iPhone(string name)
+        : m_name(name)
+    {
+    }
+    ~iPhone()
+    {
+    }
+    void ShowDecorate()
+    {
+        cout << m_name << "的装饰" << endl;
+    }
+};
+
+// 具体手机类
+class NokiaPhone : public Phone
+{
+private:
+    string m_name;
+
+public:
+    NokiaPhone(string name)
+        : m_name(name)
+    {
+    }
+    ~NokiaPhone()
+    {
+    }
+    void ShowDecorate()
+    {
+        cout << m_name << "的装饰" << endl;
+    }
+};
+
+// 抽象装饰类，继承Component
+class DecoratorPhone : public Phone
+{
+private:
+    Phone *m_phone;  // 要装饰的手机
+
+public:
+    DecoratorPhone(Phone *phone)
+        : m_phone(phone)
+    {
+    }
+    virtual void ShowDecorate()
+    {
+        m_phone->ShowDecorate();
+    }
+};
+
+class DecoratorPhoneA : public DecoratorPhone
+{
+public:
+    DecoratorPhoneA(Phone *phone)
+        : DecoratorPhone(phone)
+    {
+    }
+    void ShowDecorate()
+    {
+        DecoratorPhone::ShowDecorate();
+        AddDecorate();
+    }
+
+private:
+    void AddDecorate()
+    {
+        cout << "增加挂件" << endl;
+    }
+};
+
+class DecoratorPhoneB : public DecoratorPhone
+{
+public:
+    DecoratorPhoneB(Phone *phone)
+        : DecoratorPhone(phone)
+    {
+    }
+    void ShowDecorate()
+    {
+        DecoratorPhone::ShowDecorate();
+        AddDecorate();
+    }
+
+private:
+    void AddDecorate()
+    {
+        cout << "屏幕贴膜" << endl;
+    }
+};
+
+int main(int argc, char *argv[])
+{
+    Phone *iphone = new NokiaPhone("6300");
+    Phone *dpa    = new DecoratorPhoneA(iphone);  // 装饰， 增加挂件
+    Phone *dpb    = new DecoratorPhoneB(dpa);     // 装饰，屏幕贴膜
+    dpb->ShowDecorate();
+
+    delete dpa;
+    delete dpb;
+    delete iphone;
+
+    return 0;
+}
+```
+
+# 策略模式
+是指定义一系列的算法，把它们一个个封装起来，并且使它们可相互替换。
+
+如我们有很多排序算法，但是在不通的环境中，需要使用不同算法，那就可以定义一个抽象类，提供统一的接口，然后在各个排序算法继承抽象类，并实现该子类的排序算法 ，再定义一个项目类，通过构造函数传入不同算法类的对象或是模板实例化来表示在不同的项目中用使用不同的算法
+```cpp
+#include <iostream>
+
+using namespace std;
+
+class Sort
+{
+public:
+    virtual void userSort() = 0;
+    virtual ~Sort(){};
+};
+
+class BubbleSort : public Sort
+{
+public:
+    virtual void userSort() override
+    {
+        cout << "BubbleSort::userSort()" << endl;
+    }
+};
+
+class SelectSort : public Sort
+{
+public:
+    virtual void userSort() override
+    {
+        cout << "SelectSort::userSort()" << endl;
+    }
+};
+
+class InsertSort : public Sort
+{
+public:
+    virtual void userSort() override
+    {
+        cout << "InsertSort::userSort()" << endl;
+    }
+};
+
+class QuickSort : public Sort  //快速排序算法类
+{
+public:
+    virtual void userSort()
+    {
+        cout << "QuickSort::userSort()" << endl;
+    }
+};
+
+class Project  //项目类，来根据不同的对象替换不同的算法
+{
+private:
+    Sort *m_sort;
+
+public:
+    Project()
+    {
+    }
+
+    Project(Sort *sort)
+        : m_sort(sort)
+    {
+    }
+
+    void replaceSort()
+    {
+        m_sort->userSort();
+    }
+    ~Project()
+    {
+        if(NULL != m_sort)
+            delete m_sort;
+    }
+};
+
+int main(void)
+{
+    Sort *  sort = new BubbleSort();
+    Project pro(sort);
+    pro.replaceSort();
+
+    return 0;
+}
+```
