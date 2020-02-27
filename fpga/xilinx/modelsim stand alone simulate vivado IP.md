@@ -34,7 +34,7 @@
 ```tcl
 # demo.tcl
 quit -sim
-set env(VIVADO_SIM)     F:/crack/vivado2017.4_lib      #仿真库文件所在目录
+set env(VIVADO_SIM)     F:/crack/vivado2017.4_questasim_10.6c_lib      #仿真库文件所在目录
 vmap secureip           $env(VIVADO_SIM)/secureip
 vmap simprims_ver       $env(VIVADO_SIM)/simprims_ver
 vmap unifast            $env(VIVADO_SIM)/unifast
